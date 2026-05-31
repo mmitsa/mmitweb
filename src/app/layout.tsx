@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Sans_Arabic, Tajawal } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
@@ -92,7 +91,6 @@ export default function RootLayout({
         <main id="main-content" className="flex-grow">{children}</main>
         <Footer />
         <WhatsAppFab />
-        <Analytics />
       </body>
     </html>
   );

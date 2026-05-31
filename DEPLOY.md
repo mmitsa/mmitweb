@@ -1,77 +1,146 @@
-# دليل النشر على Vercel — مسارات المستكشف
+# دليل النشر على سيرفر خاص — مسارات المستكشف
 
-موقع Next.js (App Router) جاهز للنشر على Vercel بدون إعداد إضافي — Vercel يكتشف
-Next.js تلقائيًا.
+موقع Next.js (App Router) يُبنى كـ **خادم Node مستقل (standalone)** ويُشغّل خلف
+وكيل عكسي (nginx). يدعم الميزات الديناميكية (نموذج التواصل / Server Actions).
 
-## ١. ربط المشروع
+> المتطلبات على السيرفر: **Node.js 20+ (يُفضّل 22/24)**، و**nginx** كوكيل عكسي،
+> واختياريًا **PM2** أو **systemd** لإبقاء الخدمة تعمل.
 
-```bash
-# أداة Vercel (مرة واحدة)
-npm i -g vercel
+---
 
-# من جذر المشروع
-vercel link          # اربط بمشروع Vercel (أو أنشئ واحدًا)
-```
+## ١. متغيّرات البيئة
 
-أو عبر لوحة Vercel: **New Project → Import Git Repository** واختر المستودع.
-الإعدادات تُكتشف تلقائيًا:
-
-| الإعداد | القيمة |
-|--------|--------|
-| Framework Preset | Next.js |
-| Build Command | `next build` (افتراضي) |
-| Output | تلقائي |
-| Node.js | 24.x (الافتراضي الحالي) |
-
-## ٢. متغيّرات البيئة
-
-اضبطها في **Project Settings → Environment Variables** (أو عبر CLI). كلها
-**اختيارية** — الموقع يعمل بدونها (نموذج التواصل يسجّل في السجلّ بدل الإرسال،
-وتحديد المعدّل يصبح داخل الذاكرة).
-
-| المتغيّر | الغرض |
-|---------|-------|
-| `RESEND_API_KEY` | إرسال رسائل نموذج التواصل عبر [Resend](https://resend.com) |
-| `CONTACT_TO_EMAIL` | بريد استقبال الرسائل (الافتراضي `admin@mmit.sa`) |
-| `CONTACT_FROM_EMAIL` | المُرسِل المُوثّق في Resend |
-| `UPSTASH_REDIS_REST_URL` | تحديد معدّل موزّع (اختياري) — [Upstash](https://upstash.com) |
-| `UPSTASH_REDIS_REST_TOKEN` | رمز Upstash |
-
-عبر CLI:
+أنشئ ملف `.env` (أو اضبط متغيّرات النظام). كلها **اختيارية** — الموقع يعمل بدونها
+(نموذج التواصل يسجّل في السجلّ بدل الإرسال، وتحديد المعدّل يصبح داخل الذاكرة):
 
 ```bash
-vercel env add RESEND_API_KEY production
-vercel env add CONTACT_TO_EMAIL production
-# ... كرّر لكل متغيّر، ولـ preview/development عند الحاجة
+RESEND_API_KEY=...            # إرسال رسائل نموذج التواصل (resend.com)
+CONTACT_TO_EMAIL=admin@mmit.sa
+CONTACT_FROM_EMAIL=...        # مُرسِل موثّق في Resend
+UPSTASH_REDIS_REST_URL=...    # تحديد معدّل موزّع (اختياري)
+UPSTASH_REDIS_REST_TOKEN=...
+PORT=3000                     # منفذ الخادم (افتراضي 3000)
+HOSTNAME=127.0.0.1            # ربط محلي خلف nginx
 ```
 
-> Resend يتطلّب توثيق نطاق المُرسِل (`mmit.sa`) لإرسال من بريد رسمي.
-
-## ٣. النشر
+## ٢. البناء
 
 ```bash
-vercel            # نشر معاينة (Preview)
-vercel --prod     # نشر للإنتاج
+npm ci
+npm run build      # يُنتج .next/standalone (بفضل output: "standalone")
 ```
 
-أو ادفع إلى الفرع المرتبط بالإنتاج في Git ليُنشر تلقائيًا.
+ناتج standalone لا يتضمّن `public/` ولا `.next/static/` تلقائيًا — انسخهما:
 
-## ٤. النطاق
+```bash
+cp -r public .next/standalone/public
+cp -r .next/static .next/standalone/.next/static
+```
 
-في **Project Settings → Domains** أضف `mmit.sa` و`www.mmit.sa`، واتبع تعليمات
-سجلّات DNS (A / CNAME). بعد ربط النطاق، حدّث `site.url` في
-[`src/lib/site.ts`](src/lib/site.ts) إن لزم (مضبوط حاليًا على `https://mmit.sa`).
+## ٣. التشغيل (Node مباشرة)
 
-## ٥. ما بعد النشر
+```bash
+cd .next/standalone
+PORT=3000 HOSTNAME=127.0.0.1 node server.js
+```
 
-- تأكّد من ظهور `/sitemap.xml` و`/robots.txt`.
-- أرسل الـ sitemap في **Google Search Console**.
-- اختبر نموذج التواصل (يحتاج `RESEND_API_KEY` للإرسال الفعلي).
-- راقب الزيارات عبر **Vercel Analytics** (مفعّل في الكود).
+### مع PM2 (مستحسن)
+
+```bash
+npm i -g pm2
+cd /var/www/mmitweb/.next/standalone
+pm2 start server.js --name mmitweb --env production
+pm2 save && pm2 startup     # تشغيل تلقائي عند الإقلاع
+```
+
+### أو عبر systemd
+
+`/etc/systemd/system/mmitweb.service`:
+
+```ini
+[Unit]
+Description=mmitweb (Next.js)
+After=network.target
+
+[Service]
+WorkingDirectory=/var/www/mmitweb/.next/standalone
+ExecStart=/usr/bin/node server.js
+Environment=NODE_ENV=production
+Environment=PORT=3000
+Environment=HOSTNAME=127.0.0.1
+EnvironmentFile=/var/www/mmitweb/.env
+Restart=always
+User=www-data
+
+[Install]
+WantedBy=multi-user.target
+```
+
+```bash
+sudo systemctl enable --now mmitweb
+```
+
+## ٤. nginx (وكيل عكسي + SSL)
+
+`/etc/nginx/sites-available/mmit.sa`:
+
+```nginx
+server {
+    listen 80;
+    server_name mmit.sa www.mmit.sa;
+
+    location / {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Host              $host;
+        proxy_set_header X-Real-IP         $remote_addr;
+        proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Upgrade           $http_upgrade;
+        proxy_set_header Connection        "upgrade";
+    }
+
+    # كاش لأصول Next الثابتة
+    location /_next/static/ {
+        proxy_pass http://127.0.0.1:3000;
+        add_header Cache-Control "public, max-age=31536000, immutable";
+    }
+}
+```
+
+```bash
+sudo ln -s /etc/nginx/sites-available/mmit.sa /etc/nginx/sites-enabled/
+sudo nginx -t && sudo systemctl reload nginx
+sudo certbot --nginx -d mmit.sa -d www.mmit.sa    # شهادة SSL مجانية
+```
+
+> `X-Forwarded-For` مهم لعمل تحديد المعدّل في نموذج التواصل بشكل صحيح.
+
+## ٥. Docker (بديل)
+
+المشروع يحوي [`Dockerfile`](Dockerfile) جاهزًا:
+
+```bash
+docker build -t mmitweb .
+docker run -d --name mmitweb -p 3000:3000 --env-file .env mmitweb
+```
+
+ثم وجّه nginx إلى `127.0.0.1:3000` كما في الخطوة ٤.
+
+## ٦. التحديث
+
+```bash
+git pull
+npm ci && npm run build
+cp -r public .next/standalone/public
+cp -r .next/static .next/standalone/.next/static
+pm2 restart mmitweb       # أو: sudo systemctl restart mmitweb
+```
 
 ## ملاحظات
 
-- **ترويسات الأمان** مضبوطة في [`next.config.ts`](next.config.ts)
-  (HSTS، nosniff، X-Frame-Options، Referrer-Policy، Permissions-Policy).
-- **الشعار**: استبدل ملفات `public/brand/` بالتصدير الرسمي للمطابقة 100%.
-- **الصور**: عند توفّر صور حقيقية للهيرو/المشاريع، استخدم `next/image`.
+- **ترويسات الأمان** (HSTS, nosniff, ...) مضبوطة في [`next.config.ts`](next.config.ts).
+- **التحليلات**: أُزيلت Vercel Analytics. للتحليلات على سيرفرك استخدم حلًّا
+  ذاتي الاستضافة مثل **Plausible** أو **Umami** (أخبرني لأركّبه).
+- بعد ربط النطاق تأكّد أن `site.url` في [`src/lib/site.ts`](src/lib/site.ts) صحيح.
+- أرسل `/sitemap.xml` إلى Google Search Console.
