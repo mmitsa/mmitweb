@@ -5,6 +5,7 @@ import { Container } from "@/components/container";
 import { ButtonLink } from "@/components/button";
 import { Icon } from "@/components/icon";
 import { PathsBackdrop } from "@/components/paths";
+import { BreadcrumbJsonLd } from "@/components/json-ld";
 import { getService, services } from "@/lib/site";
 
 export function generateStaticParams() {
@@ -39,6 +40,13 @@ export default async function ServiceDetailPage({
 
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "الرئيسية", path: "/" },
+          { name: "الخدمات", path: "/services" },
+          { name: service.title, path: `/services/${service.slug}` },
+        ]}
+      />
       {/* Hero */}
       <section className="paths-surface relative overflow-hidden border-b border-outline-variant/30 bg-surface-container-lowest py-16 md:py-20">
         <PathsBackdrop className="opacity-60" />

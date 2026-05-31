@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Container } from "@/components/container";
 import { ButtonLink } from "@/components/button";
 import { Icon } from "@/components/icon";
+import { BreadcrumbJsonLd } from "@/components/json-ld";
 import { getProduct, products, site } from "@/lib/site";
 
 export function generateStaticParams() {
@@ -38,6 +39,13 @@ export default async function ProductDetailPage({
 
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "الرئيسية", path: "/" },
+          { name: "المنتجات", path: "/products" },
+          { name: product.title, path: `/products/${product.slug}` },
+        ]}
+      />
       {/* Hero */}
       <section className="relative overflow-hidden bg-primary py-16 text-on-primary md:py-20">
         <div

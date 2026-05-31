@@ -48,6 +48,7 @@ export function Navbar() {
             <li key={item.href}>
               <Link
                 href={item.href}
+                aria-current={isActive(item.href) ? "page" : undefined}
                 className={cn(
                   "font-head text-sm transition-colors duration-200",
                   isActive(item.href)
@@ -90,6 +91,7 @@ export function Navbar() {
                 <Link
                   href={item.href}
                   onClick={() => setOpen(false)}
+                  aria-current={isActive(item.href) ? "page" : undefined}
                   className={cn(
                     "block rounded px-3 py-3 font-head text-sm transition-colors",
                     isActive(item.href)
