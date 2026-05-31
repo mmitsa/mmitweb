@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>خدماتنا - مسارات المستكشف</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=Tajawal:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#e1e3e4",
+                        "primary-fixed-dim": "#c2c6d6",
+                        "outline": "#76777c",
+                        "on-secondary-fixed-variant": "#1132c1",
+                        "on-primary-fixed": "#161b27",
+                        "on-tertiary-fixed": "#001f28",
+                        "tertiary": "#00080d",
+                        "on-background": "#191c1d",
+                        "secondary-fixed-dim": "#bbc3ff",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#828696",
+                        "inverse-surface": "#2e3132",
+                        "on-secondary-fixed": "#000f5c",
+                        "surface": "#f8f9fa",
+                        "secondary-fixed": "#dee0ff",
+                        "on-tertiary-fixed-variant": "#004e60",
+                        "surface-variant": "#e1e3e4",
+                        "primary": "#030611",
+                        "secondary": "#324cd6",
+                        "background": "#f8f9fa",
+                        "on-tertiary-container": "#0093b4",
+                        "outline-variant": "#c6c6cc",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#424754",
+                        "on-surface-variant": "#45464c",
+                        "surface-bright": "#f8f9fa",
+                        "primary-fixed": "#dee2f3",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#d9dadb",
+                        "inverse-primary": "#c2c6d6",
+                        "tertiary-container": "#00232d",
+                        "on-surface": "#191c1d",
+                        "tertiary-fixed-dim": "#4cd6ff",
+                        "surface-tint": "#595e6c",
+                        "surface-container": "#edeeef",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#f0f1f2",
+                        "surface-container-low": "#f3f4f5",
+                        "secondary-container": "#4e67f0",
+                        "tertiary-fixed": "#b7eaff",
+                        "on-secondary-container": "#fffbff",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#1a1f2b",
+                        "surface-container-high": "#e7e8e9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "margin-desktop": "64px",
+                        "stack-sm": "12px",
+                        "stack-md": "24px",
+                        "stack-lg": "48px",
+                        "margin-mobile": "20px",
+                        "container-max": "1280px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["IBM Plex Sans Arabic", "sans-serif"],
+                        "body-md": ["Tajawal", "sans-serif"],
+                        "headline-lg": ["IBM Plex Sans Arabic", "sans-serif"],
+                        "body-lg": ["Tajawal", "sans-serif"],
+                        "headline-md": ["IBM Plex Sans Arabic", "sans-serif"],
+                        "label-md": ["IBM Plex Sans Arabic", "sans-serif"],
+                        "caption": ["Tajawal", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", { "lineHeight": "60px", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .soft-shadow {
+            box-shadow: 0 4px 20px rgba(26, 31, 43, 0.05);
+        }
+        .hover-card:hover {
+            box-shadow: 0 8px 30px rgba(26, 31, 43, 0.08);
+            transform: translateY(-4px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar Shared Component -->
+<header class="docked full-width top-0 shadow-sm bg-surface z-50 sticky">
+<nav class="flex flex-row-reverse justify-between items-center px-margin-desktop max-w-container-max mx-auto w-full h-20">
+<!-- Brand -->
+<div class="text-headline-md font-display-lg text-primary">
+                مسارات المستكشف
+            </div>
+<!-- Links (Desktop) -->
+<ul class="hidden md:flex flex-row-reverse gap-8 items-center h-full">
+<li class="h-full flex items-center">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors duration-200 h-full flex items-center" href="#">الرئيسية</a>
+</li>
+<li class="h-full flex items-center border-b-2 border-secondary pb-1">
+<a class="font-label-md text-label-md text-secondary font-bold hover:text-secondary transition-colors duration-200 h-full flex items-center" href="#">الخدمات</a>
+</li>
+<li class="h-full flex items-center">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors duration-200 h-full flex items-center" href="#">أعمالنا</a>
+</li>
+<li class="h-full flex items-center">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors duration-200 h-full flex items-center" href="#">من نحن</a>
+</li>
+<li class="h-full flex items-center">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors duration-200 h-full flex items-center" href="#">تواصل معنا</a>
+</li>
+</ul>
+<!-- Trailing Action -->
+<button class="bg-secondary text-on-secondary px-6 py-2 rounded-DEFAULT font-label-md text-label-md hover:bg-secondary-container transition-colors duration-200 hidden md:block">
+                اطلب عرض سعر
+            </button>
+<!-- Mobile Menu Toggle -->
+<button class="md:hidden text-primary p-2">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</nav>
+</header>
+<main class="flex-grow">
+<!-- Hero Section -->
+<section class="py-24 md:py-32 px-margin-mobile md:px-margin-desktop bg-surface-container-lowest relative overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="Abstract Tech Background" class="w-full h-full object-cover opacity-10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzyiZ5FPt05BonjwgTaR8KAQ5_LYnySSiMwIxaiq-YMvY51iju6Qb4XIDnZJukplRSjAGvAJpcPLuq514q2t0X6PIDf_kO5oiuoUmo-J06opg0P2MBiFVZcGo_OtT1RjJQPvQX43k2IQ7IJDUEkGVL1AMVE5sN3S9-RE_276iYphOAY8B86gAZkK330h5lK3FkxVhbhRJsRlCM3WJ0yelwX0Q53bPWmqEoGbqWiEA632MvPE78QZhJWxk9tuzKRvnVw4HzSLTAz1GM"/>
+<div class="absolute inset-0 bg-gradient-to-b from-surface-container-lowest/80 to-surface-container-lowest"></div>
+</div>
+<div class="max-w-container-max mx-auto relative z-10 text-center flex flex-col items-center">
+<h1 class="font-display-lg text-5xl md:text-7xl text-primary mb-6 font-bold tracking-tight">خدماتنا</h1>
+<p class="font-body-lg text-xl md:text-2xl text-on-surface-variant max-w-4xl mx-auto mb-10 leading-relaxed">
+                    نقدم في مسارات المستكشف مجموعة متكاملة من الحلول التقنية المتقدمة، مصممة خصيصاً لتلبية احتياجات قطاع الأعمال والارتقاء بكفاءة العمليات التشغيلية نحو مستقبل رقمي مستدام.
+                </p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<button class="bg-secondary text-on-secondary px-8 py-4 rounded-lg font-label-md text-lg hover:bg-secondary-container hover:text-on-secondary-container transition-colors duration-200 shadow-md">
+                        اطلب عرض سعر
+                    </button>
+<button class="border-2 border-secondary text-secondary px-8 py-4 rounded-lg font-label-md text-lg hover:bg-secondary-fixed transition-colors duration-200">
+                        تواصل معنا
+                    </button>
+</div>
+</div>
+</section>
+<!-- Services Grid -->
+<section class="py-stack-lg px-margin-mobile md:px-margin-desktop bg-background">
+<div class="max-w-container-max mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Card 1 -->
+<div class="bg-surface rounded-xl p-6 soft-shadow hover-card transition-all duration-300 border-t-4 border-secondary flex flex-col h-full">
+<div class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary mb-4">
+<span class="material-symbols-outlined" data-icon="router">router</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">حلول الاتصالات والشبكات</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow">
+                            تصميم وتنفيذ شبكات اتصالات متقدمة تضمن استقرار وسرعة نقل البيانات للمؤسسات بمختلف أحجامها.
+                        </p>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface rounded-xl p-6 soft-shadow hover-card transition-all duration-300 border-t-4 border-primary flex flex-col h-full">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center text-primary mb-4">
+<span class="material-symbols-outlined" data-icon="dns">dns</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">البنية التحتية لتقنية المعلومات</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow">
+                            تأسيس بنية تحتية قوية وقابلة للتطوير تدعم التحول الرقمي وتضمن استمرارية الأعمال بكفاءة.
+                        </p>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface rounded-xl p-6 soft-shadow hover-card transition-all duration-300 border-t-4 border-secondary flex flex-col h-full">
+<div class="w-12 h-12 rounded-full bg-error-container flex items-center justify-center text-error mb-4">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">الأمن السيبراني وحماية البيانات</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow">
+                            توفير طبقات حماية متقدمة للأنظمة والبيانات ضد التهديدات السيبرانية المتزايدة بفعالية عالية.
+                        </p>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface rounded-xl p-6 soft-shadow hover-card transition-all duration-300 border-t-4 border-primary flex flex-col h-full">
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary-container mb-4">
+<span class="material-symbols-outlined" data-icon="transform">transform</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">التحول الرقمي وأتمتة الأعمال</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow">
+                            تحويل العمليات التقليدية إلى رقمية لتحسين الكفاءة وتقليل الأخطاء البشرية وتسريع الإنجاز.
+                        </p>
+</div>
+<!-- Card 5 -->
+<div class="bg-surface rounded-xl p-6 soft-shadow hover-card transition-all duration-300 border-t-4 border-secondary flex flex-col h-full">
+<div class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary mb-4">
+<span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">الأنظمة الذكية وحلول إنترنت الأشياء</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow">
+                            تطوير ودمج أنظمة ذكية تعتمد على إنترنت الأشياء لمراقبة وإدارة الموارد بذكاء.
+                        </p>
+</div>
+<!-- Card 6 -->
+<div class="bg-surface rounded-xl p-6 soft-shadow hover-card transition-all duration-300 border-t-4 border-primary flex flex-col h-full">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center text-primary mb-4">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">الدعم الفني والتشغيل والصيانة</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow">
+                            خدمات دعم فني شاملة وصيانة دورية لضمان استمرارية عمل الأنظمة دون انقطاع.
+                        </p>
+</div>
+<!-- Card 7 -->
+<div class="bg-surface rounded-xl p-6 soft-shadow hover-card transition-all duration-300 border-t-4 border-secondary flex flex-col h-full">
+<div class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary mb-4">
+<span class="material-symbols-outlined" data-icon="precision_manufacturing">precision_manufacturing</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">توريد وتركيب الأجهزة والأنظمة التقنية</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow">
+                            توفير أحدث الأجهزة والمعدات التقنية مع خدمات التركيب الاحترافي والتهيئة.
+                        </p>
+</div>
+<!-- Card 8 -->
+<div class="bg-surface rounded-xl p-6 soft-shadow hover-card transition-all duration-300 border-t-4 border-primary flex flex-col h-full">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center text-primary mb-4">
+<span class="material-symbols-outlined" data-icon="storage">storage</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">حلول مراكز البيانات والخوادم</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow">
+                            تصميم وتجهيز مراكز بيانات متطورة تضمن حفظ ومعالجة البيانات بأعلى معايير الأمان والأداء.
+                        </p>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-stack-lg px-margin-mobile md:px-margin-desktop bg-surface-container-high border-t border-outline-variant/30">
+<div class="max-w-container-max mx-auto text-center flex flex-col items-center">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-stack-sm">هل تبحث عن حلول تقنية مخصصة؟</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mb-stack-md">
+                    فريق خبرائنا جاهز لتقديم استشارات تقنية تناسب متطلبات أعمالك بدقة واحترافية.
+                </p>
+<div class="flex gap-4">
+<button class="bg-secondary text-on-secondary px-8 py-3 rounded-DEFAULT font-label-md text-label-md hover:bg-secondary-container transition-colors duration-200">
+                        تواصل معنا الآن
+                    </button>
+<button class="border border-primary text-primary px-8 py-3 rounded-DEFAULT font-label-md text-label-md hover:bg-primary-fixed transition-colors duration-200">
+                        طلب استشارة
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Shared Component -->
+<footer class="bg-primary full-width bottom py-stack-lg px-margin-desktop w-full text-on-primary">
+<div class="flex flex-col items-center max-w-container-max mx-auto w-full">
+<div class="text-headline-md font-display-lg text-on-primary mb-stack-md">
+                مسارات المستكشف
+            </div>
+<ul class="flex flex-wrap justify-center gap-6 mb-stack-md">
+<li><a class="font-label-md text-label-md text-surface-variant opacity-80 hover:text-secondary-fixed-dim transition-colors" href="#">الرئيسية</a></li>
+<li><a class="font-label-md text-label-md text-tertiary-fixed font-bold hover:text-secondary-fixed-dim transition-colors underline" href="#">الخدمات</a></li>
+<li><a class="font-label-md text-label-md text-surface-variant opacity-80 hover:text-secondary-fixed-dim transition-colors" href="#">أعمالنا</a></li>
+<li><a class="font-label-md text-label-md text-surface-variant opacity-80 hover:text-secondary-fixed-dim transition-colors" href="#">من نحن</a></li>
+<li><a class="font-label-md text-label-md text-surface-variant opacity-80 hover:text-secondary-fixed-dim transition-colors" href="#">تواصل معنا</a></li>
+<li><a class="font-label-md text-label-md text-surface-variant opacity-80 hover:text-secondary-fixed-dim transition-colors" href="#">سياسة الخصوصية</a></li>
+</ul>
+<div class="font-body-md text-body-md text-surface-variant opacity-60 mt-stack-md text-center border-t border-on-primary/10 pt-4 w-full">
+                جميع الحقوق محفوظة لشركة مسارات المستكشف © 2024
+            </div>
+</div>
+</footer>
+</body></html>

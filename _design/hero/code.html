@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>من نحن - مسارات المستكشف</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=Tajawal:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#e1e3e4",
+                        "primary-fixed-dim": "#c2c6d6",
+                        "outline": "#76777c",
+                        "on-secondary-fixed-variant": "#1132c1",
+                        "on-primary-fixed": "#161b27",
+                        "on-tertiary-fixed": "#001f28",
+                        "tertiary": "#00080d",
+                        "on-background": "#191c1d",
+                        "secondary-fixed-dim": "#bbc3ff",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#828696",
+                        "inverse-surface": "#2e3132",
+                        "on-secondary-fixed": "#000f5c",
+                        "surface": "#f8f9fa",
+                        "secondary-fixed": "#dee0ff",
+                        "on-tertiary-fixed-variant": "#004e60",
+                        "surface-variant": "#e1e3e4",
+                        "primary": "#030611",
+                        "secondary": "#324cd6",
+                        "background": "#f8f9fa",
+                        "on-tertiary-container": "#0093b4",
+                        "outline-variant": "#c6c6cc",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#424754",
+                        "on-surface-variant": "#45464c",
+                        "surface-bright": "#f8f9fa",
+                        "primary-fixed": "#dee2f3",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#d9dadb",
+                        "inverse-primary": "#c2c6d6",
+                        "tertiary-container": "#00232d",
+                        "on-surface": "#191c1d",
+                        "tertiary-fixed-dim": "#4cd6ff",
+                        "surface-tint": "#595e6c",
+                        "surface-container": "#edeeef",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#f0f1f2",
+                        "surface-container-low": "#f3f4f5",
+                        "secondary-container": "#4e67f0",
+                        "tertiary-fixed": "#b7eaff",
+                        "on-secondary-container": "#fffbff",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#1a1f2b",
+                        "surface-container-high": "#e7e8e9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "margin-desktop": "64px",
+                        "stack-sm": "12px",
+                        "stack-md": "24px",
+                        "stack-lg": "48px",
+                        "margin-mobile": "20px",
+                        "container-max": "1280px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["IBM Plex Sans Arabic"],
+                        "body-md": ["Tajawal"],
+                        "headline-lg": ["IBM Plex Sans Arabic"],
+                        "body-lg": ["Tajawal"],
+                        "headline-md": ["IBM Plex Sans Arabic"],
+                        "label-md": ["IBM Plex Sans Arabic"],
+                        "caption": ["Tajawal"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", { "lineHeight": "60px", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        .soft-shadow {
+            box-shadow: 0 4px 20px rgba(26, 31, 43, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md rtl selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+<!-- TopNavBar from JSON -->
+<nav class="docked full-width top-0 shadow-sm bg-surface dark:bg-primary z-50 sticky transition-all duration-300">
+<div class="flex flex-row-reverse justify-between items-center px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full h-20">
+<!-- Brand -->
+<a class="text-headline-md font-display-lg text-primary dark:text-on-primary-fixed hover:opacity-80 transition-opacity" href="#">
+                مسارات المستكشف
+            </a>
+<!-- Navigation Links (Hidden on Mobile) -->
+<ul class="hidden md:flex flex-row-reverse space-x-reverse space-x-8">
+<li><a class="text-on-surface-variant dark:text-surface-variant font-label-md text-label-md hover:text-secondary transition-colors duration-200" href="#">الرئيسية</a></li>
+<li><a class="text-on-surface-variant dark:text-surface-variant font-label-md text-label-md hover:text-secondary transition-colors duration-200" href="#">الخدمات</a></li>
+<li><a class="text-on-surface-variant dark:text-surface-variant font-label-md text-label-md hover:text-secondary transition-colors duration-200" href="#">أعمالنا</a></li>
+<!-- Active Item -->
+<li><a class="text-secondary font-bold font-label-md text-label-md border-b-2 border-secondary pb-1 hover:text-secondary transition-colors duration-200" href="#">من نحن</a></li>
+<li><a class="text-on-surface-variant dark:text-surface-variant font-label-md text-label-md hover:text-secondary transition-colors duration-200" href="#">تواصل معنا</a></li>
+</ul>
+<!-- Trailing Action -->
+<a class="hidden md:inline-flex bg-secondary text-on-secondary font-label-md text-label-md px-6 py-2 rounded shadow-sm hover:bg-secondary-container transition-colors duration-200 items-center justify-center" href="#">
+                اطلب عرض سعر
+            </a>
+<!-- Mobile Menu Toggle (Simplified for structure) -->
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined text-[32px]">menu</span>
+</button>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="w-full">
+<!-- 1. Hero Section -->
+<section class="relative h-[600px] flex items-center justify-start overflow-hidden px-margin-mobile md:px-margin-desktop">
+<!-- Background Image -->
+<div class="absolute inset-0 z-0">
+<img alt="About Us Hero" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC42-zbJRr6snCLxZA1hGZ3MwQf_zqoqPm2w9KfW97s-PuPQf1MzdUysjS7c_jorsrdl1nSLc-H51pMnZ3zyILgILkrNszOLaNivAsqiV5rxCc5vJQuLK7xKz6cPwvspoSv4jNKVOaW76Zvt4s5odbxVLxp0EkEG_iIQ8buvTsfLR7vDXCVTnmzeZ0JQdjXHCuNKczG1BRG4G_aOghhVU6MCnRhfGs7jIwgE9JxpT5xLJsaMEpbY-S0LGp52evERnV3ZahZJr8MU5i9"/>
+<!-- Dark Overlay for Legibility -->
+<div class="absolute inset-0 bg-primary/60 mix-blend-multiply"></div>
+<div class="absolute inset-0 bg-gradient-to-l from-primary/80 via-primary/40 to-transparent"></div>
+</div>
+<!-- Content Container -->
+<div class="max-w-container-max mx-auto w-full relative z-10">
+<div class="max-w-2xl space-y-stack-md text-right">
+<nav aria-label="Breadcrumb" class="flex mb-4">
+<ol class="inline-flex items-center space-x-2 space-x-reverse text-on-primary/60 font-label-md">
+<li><a class="hover:text-on-primary transition-colors" href="#">الرئيسية</a></li>
+<li><span class="material-symbols-outlined text-[16px] mx-2">chevron_left</span></li>
+<li class="text-on-primary">من نحن</li>
+</ol>
+</nav>
+<h1 class="font-display-lg text-[56px] md:text-[72px] leading-tight text-on-primary">من نحن</h1>
+<div class="w-24 h-1 bg-secondary rounded-full"></div>
+<p class="font-body-lg text-body-lg text-on-primary/90 leading-relaxed">
+                نحن في "مسارات المستكشف" رواد في تقديم الحلول التقنية المتقدمة وخدمات الاتصالات في المملكة. نسعى لتمكين المؤسسات من خلال بنية تحتية رقمية قوية، أنظمة مبتكرة، وأمن معلومات لا يضاهى، لدفع عجلة التحول الرقمي بثقة واستدامة.
+            </p>
+</div>
+</div>
+</section>
+<!-- 2. Company Brief: Vision, Mission & Values -->
+<section class="py-stack-lg px-margin-mobile md:px-margin-desktop bg-surface-container-lowest">
+<div class="max-w-container-max mx-auto space-y-stack-md">
+<h2 class="font-headline-lg text-headline-lg text-primary text-center">نبذة مختصرة عن الشركة</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Vision Card -->
+<div class="bg-surface soft-shadow rounded-lg p-stack-md border-t-4 border-secondary relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="absolute top-4 left-4 text-secondary opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[80px]" style="font-variation-settings: 'FILL' 1;">visibility</span>
+</div>
+<div class="flex items-center gap-4 mb-4">
+<span class="material-symbols-outlined text-secondary text-[32px]">visibility</span>
+<h3 class="font-headline-md text-headline-md text-primary">الرؤية</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant relative z-10">
+                            أن نكون الشريك التقني الأول والموثوق في المملكة، ونساهم في بناء مستقبل رقمي متكامل يعتمد على الابتكار والاستدامة في قطاع الاتصالات وتقنية المعلومات.
+                        </p>
+</div>
+<!-- Mission Card -->
+<div class="bg-surface soft-shadow rounded-lg p-stack-md border-t-4 border-tertiary-fixed-dim relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="absolute top-4 left-4 text-tertiary-fixed-dim opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[80px]" style="font-variation-settings: 'FILL' 1;">track_changes</span>
+</div>
+<div class="flex items-center gap-4 mb-4">
+<span class="material-symbols-outlined text-tertiary-fixed-dim text-[32px]">track_changes</span>
+<h3 class="font-headline-md text-headline-md text-primary">الرسالة</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant relative z-10">
+                            تقديم حلول تقنية مبتكرة وموثوقة تفوق توقعات عملائنا، من خلال فريق عمل محترف وشراكات استراتيجية، لتمكين القطاعات الحكومية والخاصة من تحقيق أهدافها التشغيلية بأعلى كفاءة.
+                        </p>
+</div>
+</div>
+<!-- Core Values -->
+<div class="mt-stack-lg">
+<h3 class="font-headline-md text-headline-md text-center text-primary mb-stack-sm">قيمنا الأساسية</h3>
+<div class="flex flex-wrap justify-center gap-4">
+<!-- Value Chips -->
+<div class="bg-secondary-fixed/30 text-on-secondary-fixed font-label-md text-label-md px-6 py-3 rounded-full flex items-center gap-2 border border-secondary-fixed-dim hover:bg-secondary-fixed/50 transition-colors">
+<span class="material-symbols-outlined text-[20px]">verified_user</span> الالتزام
+                        </div>
+<div class="bg-secondary-fixed/30 text-on-secondary-fixed font-label-md text-label-md px-6 py-3 rounded-full flex items-center gap-2 border border-secondary-fixed-dim hover:bg-secondary-fixed/50 transition-colors">
+<span class="material-symbols-outlined text-[20px]">lightbulb</span> الابتكار
+                        </div>
+<div class="bg-secondary-fixed/30 text-on-secondary-fixed font-label-md text-label-md px-6 py-3 rounded-full flex items-center gap-2 border border-secondary-fixed-dim hover:bg-secondary-fixed/50 transition-colors">
+<span class="material-symbols-outlined text-[20px]">speed</span> الكفاءة
+                        </div>
+<div class="bg-secondary-fixed/30 text-on-secondary-fixed font-label-md text-label-md px-6 py-3 rounded-full flex items-center gap-2 border border-secondary-fixed-dim hover:bg-secondary-fixed/50 transition-colors">
+<span class="material-symbols-outlined text-[20px]">eco</span> الاستدامة
+                        </div>
+<div class="bg-secondary-fixed/30 text-on-secondary-fixed font-label-md text-label-md px-6 py-3 rounded-full flex items-center gap-2 border border-secondary-fixed-dim hover:bg-secondary-fixed/50 transition-colors">
+<span class="material-symbols-outlined text-[20px]">handshake</span> الشراكة
+                        </div>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. Fields of Work (Bento Grid) -->
+<section class="py-stack-lg px-margin-mobile md:px-margin-desktop bg-surface">
+<div class="max-w-container-max mx-auto">
+<h2 class="font-headline-lg text-headline-lg text-primary text-right mb-stack-md">مجالات العمل</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Area 1: Info Security (Featured) -->
+<div class="md:col-span-2 bg-primary text-on-primary rounded-xl p-stack-md relative overflow-hidden flex flex-col justify-end min-h-[300px]">
+<div class="absolute top-0 right-0 p-6 z-10">
+<span class="material-symbols-outlined text-[48px] text-tertiary-fixed-dim">security</span>
+</div>
+<!-- Abstract bg -->
+<div class="absolute inset-0 opacity-20" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.1) 10px, rgba(255,255,255,0.1) 20px);"></div>
+<div class="relative z-10">
+<h3 class="font-headline-md text-headline-md mb-2">أمن المعلومات</h3>
+<p class="font-body-md text-body-md opacity-80 max-w-lg">حماية الأصول الرقمية للمؤسسات من خلال بروتوكولات أمان صارمة، تقييم المخاطر، وحلول استباقية لضمان سلامة البيانات وسريتها في بيئة متصلة.</p>
+</div>
+</div>
+<!-- Area 2: Infrastructure -->
+<div class="bg-surface-container soft-shadow rounded-xl p-stack-md border border-surface-container-high hover:border-secondary transition-colors group">
+<span class="material-symbols-outlined text-[40px] text-secondary mb-4 block group-hover:scale-110 transition-transform">lan</span>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">البنية التحتية</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">تصميم وتنفيذ شبكات اتصالات قوية ومراكز بيانات تضمن استمرارية الأعمال وأداءً عالي الموثوقية.</p>
+</div>
+<!-- Area 3: Digital Systems -->
+<div class="bg-surface-container soft-shadow rounded-xl p-stack-md border border-surface-container-high hover:border-secondary transition-colors group">
+<span class="material-symbols-outlined text-[40px] text-secondary mb-4 block group-hover:scale-110 transition-transform">dns</span>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">الأنظمة الرقمية</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">تطوير ودمج أنظمة برمجية متقدمة لتسهيل إدارة العمليات المعقدة بفاعلية ودقة.</p>
+</div>
+<!-- Area 4: Digital Transformation -->
+<div class="bg-surface-container soft-shadow rounded-xl p-stack-md border border-surface-container-high hover:border-secondary transition-colors group">
+<span class="material-symbols-outlined text-[40px] text-secondary mb-4 block group-hover:scale-110 transition-transform">transform</span>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">التحول الرقمي</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">تمكين المؤسسات من الانتقال السلس إلى العمليات الرقمية الشاملة لزيادة الإنتاجية وتقليل التكاليف.</p>
+</div>
+<!-- Area 5: Tech Devices -->
+<div class="bg-surface-container soft-shadow rounded-xl p-stack-md border border-surface-container-high hover:border-secondary transition-colors group">
+<span class="material-symbols-outlined text-[40px] text-secondary mb-4 block group-hover:scale-110 transition-transform">devices</span>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">الأجهزة التقنية</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">توريد وتركيب أحدث الأجهزة والمعدات التقنية لدعم البنية التحتية للمشاريع الكبرى.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. Our Products (Cards Grid) -->
+<section class="py-stack-lg px-margin-mobile md:px-margin-desktop bg-surface-container-lowest">
+<div class="max-w-container-max mx-auto">
+<div class="text-center mb-stack-md">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-2">منتجاتنا</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto">مجموعة متكاملة من الحلول الرقمية المصممة لتلبية احتياجات مختلف القطاعات وإدارة الموارد بذكاء.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Product 1 -->
+<div class="bg-surface rounded-lg soft-shadow p-6 flex flex-col border border-surface-container hover:shadow-md transition-shadow">
+<div class="w-12 h-12 rounded bg-secondary-fixed/50 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-secondary">group</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">مسارات HR</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 flex-grow">نظام متكامل لإدارة الموارد البشرية، تتبع الحضور، وتقييم الأداء.</p>
+<a class="inline-flex items-center gap-2 text-secondary font-label-md text-label-md hover:text-on-secondary-fixed-variant transition-colors self-end" href="https://masarats.com.sa/hr" rel="noopener noreferrer" target="_blank">
+                            استكشف <span class="material-symbols-outlined text-[18px] rtl:-scale-x-100">arrow_forward</span>
+</a>
+</div>
+<!-- Product 2 -->
+<div class="bg-surface rounded-lg soft-shadow p-6 flex flex-col border border-surface-container hover:shadow-md transition-shadow">
+<div class="w-12 h-12 rounded bg-tertiary-fixed/50 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-on-tertiary-fixed-variant">payments</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">مسارات سداد</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 flex-grow">بوابة دفع آمنة وموثوقة لتسهيل المعاملات المالية للمؤسسات.</p>
+<a class="inline-flex items-center gap-2 text-secondary font-label-md text-label-md hover:text-on-secondary-fixed-variant transition-colors self-end" href="#">
+                            استكشف <span class="material-symbols-outlined text-[18px] rtl:-scale-x-100">arrow_forward</span>
+</a>
+</div>
+<!-- Product 3 -->
+<div class="bg-surface rounded-lg soft-shadow p-6 flex flex-col border border-surface-container hover:shadow-md transition-shadow">
+<div class="w-12 h-12 rounded bg-secondary-fixed/50 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-secondary">inventory</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">مسارات مخازن</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 flex-grow">حل ذكي لإدارة المخزون وتتبع الموارد بكفاءة عالية.</p>
+<a class="inline-flex items-center gap-2 text-secondary font-label-md text-label-md hover:text-on-secondary-fixed-variant transition-colors self-end" href="#">
+                            استكشف <span class="material-symbols-outlined text-[18px] rtl:-scale-x-100">arrow_forward</span>
+</a>
+</div>
+<!-- Product 4 -->
+<div class="bg-surface rounded-lg soft-shadow p-6 flex flex-col border border-surface-container hover:shadow-md transition-shadow">
+<div class="w-12 h-12 rounded bg-secondary-fixed/50 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-secondary">support_agent</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">مسارات دعم</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 flex-grow">نظام تذاكر متطور لإدارة خدمة العملاء والدعم الفني.</p>
+<a class="inline-flex items-center gap-2 text-secondary font-label-md text-label-md hover:text-on-secondary-fixed-variant transition-colors self-end" href="#">
+                            استكشف <span class="material-symbols-outlined text-[18px] rtl:-scale-x-100">arrow_forward</span>
+</a>
+</div>
+<!-- Product 5 -->
+<div class="bg-surface rounded-lg soft-shadow p-6 flex flex-col border border-surface-container hover:shadow-md transition-shadow">
+<div class="w-12 h-12 rounded bg-secondary-fixed/50 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-secondary">analytics</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">مسارات تحليل</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 flex-grow">لوحات تحكم ذكية لتحليل البيانات ودعم اتخاذ القرار.</p>
+<a class="inline-flex items-center gap-2 text-secondary font-label-md text-label-md hover:text-on-secondary-fixed-variant transition-colors self-end" href="#">
+                            استكشف <span class="material-symbols-outlined text-[18px] rtl:-scale-x-100">arrow_forward</span>
+</a>
+</div>
+<!-- Product 6 (Placeholder for pattern) -->
+<div class="bg-surface rounded-lg soft-shadow p-6 flex flex-col border border-surface-container hover:shadow-md transition-shadow">
+<div class="w-12 h-12 rounded bg-secondary-fixed/50 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-secondary">domain</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">مسارات أملاك</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 flex-grow">نظام متخصص لإدارة العقارات والممتلكات والمرافق.</p>
+<a class="inline-flex items-center gap-2 text-secondary font-label-md text-label-md hover:text-on-secondary-fixed-variant transition-colors self-end" href="#">
+                            استكشف <span class="material-symbols-outlined text-[18px] rtl:-scale-x-100">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Note: Showing 6 for layout clarity, normally would iterate all 12 -->
+<div class="text-center mt-8">
+<button class="bg-transparent border border-primary-container text-primary-container font-label-md text-label-md px-6 py-2 rounded hover:bg-surface-container-low transition-colors">
+                        عرض جميع المنتجات
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer from JSON -->
+<footer class="bg-primary dark:bg-tertiary full-width bottom flex flex-col items-center py-stack-lg px-margin-mobile md:px-margin-desktop w-full border-t border-surface-container/20">
+<div class="max-w-container-max mx-auto w-full flex flex-col md:flex-row justify-between items-center gap-8">
+<!-- Brand -->
+<div class="text-headline-md font-display-lg text-on-primary text-center md:text-right">
+                مسارات المستكشف
+            </div>
+<!-- Links -->
+<ul class="flex flex-wrap justify-center gap-6">
+<li><a class="text-surface-variant opacity-80 font-label-md text-label-md hover:text-secondary-fixed-dim transition-colors" href="#">الرئيسية</a></li>
+<li><a class="text-surface-variant opacity-80 font-label-md text-label-md hover:text-secondary-fixed-dim transition-colors" href="#">الخدمات</a></li>
+<li><a class="text-surface-variant opacity-80 font-label-md text-label-md hover:text-secondary-fixed-dim transition-colors" href="#">أعمالنا</a></li>
+<li><a class="text-tertiary-fixed font-bold font-label-md text-label-md underline hover:text-secondary-fixed-dim transition-colors" href="#">من نحن</a></li>
+<li><a class="text-surface-variant opacity-80 font-label-md text-label-md hover:text-secondary-fixed-dim transition-colors" href="#">تواصل معنا</a></li>
+<li><a class="text-surface-variant opacity-80 font-label-md text-label-md hover:text-secondary-fixed-dim transition-colors" href="#">سياسة الخصوصية</a></li>
+</ul>
+</div>
+<div class="mt-8 text-center w-full max-w-container-max border-t border-surface-container/10 pt-4">
+<p class="font-body-md text-body-md text-surface-variant opacity-60">
+                جميع الحقوق محفوظة لشركة مسارات المستكشف © 2024
+            </p>
+</div>
+</footer>
+</body></html>

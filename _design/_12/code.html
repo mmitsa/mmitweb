@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>تواصل معنا - مسارات المستكشف</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=Tajawal:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-highest": "#e1e3e4",
+                      "primary-fixed-dim": "#c2c6d6",
+                      "outline": "#76777c",
+                      "on-secondary-fixed-variant": "#1132c1",
+                      "on-primary-fixed": "#161b27",
+                      "on-tertiary-fixed": "#001f28",
+                      "tertiary": "#00080d",
+                      "on-background": "#191c1d",
+                      "secondary-fixed-dim": "#bbc3ff",
+                      "error-container": "#ffdad6",
+                      "on-primary-container": "#828696",
+                      "inverse-surface": "#2e3132",
+                      "on-secondary-fixed": "#000f5c",
+                      "surface": "#f8f9fa",
+                      "secondary-fixed": "#dee0ff",
+                      "on-tertiary-fixed-variant": "#004e60",
+                      "surface-variant": "#e1e3e4",
+                      "primary": "#030611",
+                      "secondary": "#324cd6",
+                      "background": "#f8f9fa",
+                      "on-tertiary-container": "#0093b4",
+                      "outline-variant": "#c6c6cc",
+                      "error": "#ba1a1a",
+                      "on-primary": "#ffffff",
+                      "on-primary-fixed-variant": "#424754",
+                      "on-surface-variant": "#45464c",
+                      "surface-bright": "#f8f9fa",
+                      "primary-fixed": "#dee2f3",
+                      "on-tertiary": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "surface-dim": "#d9dadb",
+                      "inverse-primary": "#c2c6d6",
+                      "tertiary-container": "#00232d",
+                      "on-surface": "#191c1d",
+                      "tertiary-fixed-dim": "#4cd6ff",
+                      "surface-tint": "#595e6c",
+                      "surface-container": "#edeeef",
+                      "on-secondary": "#ffffff",
+                      "inverse-on-surface": "#f0f1f2",
+                      "surface-container-low": "#f3f4f5",
+                      "secondary-container": "#4e67f0",
+                      "tertiary-fixed": "#b7eaff",
+                      "on-secondary-container": "#fffbff",
+                      "on-error": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "primary-container": "#1a1f2b",
+                      "surface-container-high": "#e7e8e9"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "unit": "8px",
+                      "margin-desktop": "64px",
+                      "stack-sm": "12px",
+                      "stack-md": "24px",
+                      "stack-lg": "48px",
+                      "margin-mobile": "20px",
+                      "container-max": "1280px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "display-lg": ["IBM Plex Sans Arabic", "sans-serif"],
+                      "body-md": ["Tajawal", "sans-serif"],
+                      "headline-lg": ["IBM Plex Sans Arabic", "sans-serif"],
+                      "body-lg": ["Tajawal", "sans-serif"],
+                      "headline-md": ["IBM Plex Sans Arabic", "sans-serif"],
+                      "label-md": ["IBM Plex Sans Arabic", "sans-serif"],
+                      "caption": ["Tajawal", "sans-serif"]
+              },
+              "fontSize": {
+                      "display-lg": ["48px", {"lineHeight": "60px", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                      "caption": ["12px", {"lineHeight": "16px", "fontWeight": "400"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f8f9fa; /* background */
+            color: #191c1d; /* on-background */
+        }
+        h1, h2, h3, h4, h5, h6, .display-font {
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+        }
+        .soft-shadow {
+            box-shadow: 0 4px 20px rgba(26, 31, 43, 0.05);
+        }
+    </style>
+</head>
+<body class="antialiased flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="w-full shadow-sm bg-surface sticky top-0 z-50">
+<div class="flex flex-row-reverse justify-between items-center px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full h-20">
+<!-- Brand -->
+<a class="text-headline-md font-display-lg text-primary flex items-center gap-2 flex-row-reverse" href="#">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">api</span>
+                مسارات المستكشف
+            </a>
+<!-- Navigation Links -->
+<nav class="hidden md:flex gap-6 flex-row-reverse">
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-secondary transition-colors duration-200" href="#">الرئيسية</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-secondary transition-colors duration-200" href="#">الخدمات</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-secondary transition-colors duration-200" href="#">أعمالنا</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-secondary transition-colors duration-200" href="#">من نحن</a>
+<a class="text-secondary font-bold font-label-md text-label-md border-b-2 border-secondary pb-1 opacity-80 scale-95 transition-all" href="#">تواصل معنا</a>
+</nav>
+<!-- Trailing Action -->
+<button class="hidden md:block bg-secondary text-on-secondary px-6 py-2 rounded font-label-md text-label-md hover:bg-secondary-container hover:text-on-secondary-container transition-colors">
+                اطلب عرض سعر
+            </button>
+<!-- Mobile Menu Toggle -->
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow">
+<!-- Hero Section -->
+<section class="py-stack-lg bg-surface-container-lowest relative overflow-hidden">
+<!-- Decorative bg element -->
+<div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-surface-container to-transparent opacity-50 z-0"></div>
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop relative z-10 text-center">
+<h1 class="font-display-lg text-display-lg text-primary mb-stack-sm">تواصل معنا</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                    نحن هنا لمساعدتك في تحقيق أهدافك الرقمية. فريق مسارات المستكشف مستعد للإجابة على استفساراتك وتقديم الحلول التقنية المناسبة لعملك.
+                </p>
+</div>
+</section>
+<!-- Contact Section -->
+<section class="py-stack-lg">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Contact Form (Right Side) -->
+<div class="lg:col-span-8 bg-surface-container-lowest rounded-xl soft-shadow p-6 md:p-8 border-t-4 border-secondary">
+<h2 class="font-headline-md text-headline-md text-primary mb-stack-md flex items-center gap-2 flex-row-reverse">
+<span class="material-symbols-outlined text-tertiary-fixed-dim">mail</span>
+                        أرسل لنا رسالة
+                    </h2>
+<form class="space-y-6" dir="rtl">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Name -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2 text-right" for="name">الاسم الكامل</label>
+<input class="w-full bg-surface border border-outline-variant rounded focus:border-secondary focus:ring-1 focus:ring-secondary px-4 py-2 text-on-surface font-body-md" id="name" placeholder="أدخل اسمك" type="text"/>
+</div>
+<!-- Email -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2 text-right" for="email">البريد الإلكتروني</label>
+<input class="w-full bg-surface border border-outline-variant rounded focus:border-secondary focus:ring-1 focus:ring-secondary px-4 py-2 text-on-surface font-body-md" dir="ltr" id="email" placeholder="example@domain.com" type="email"/>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Mobile -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2 text-right" for="mobile">رقم الجوال</label>
+<input class="w-full bg-surface border border-outline-variant rounded focus:border-secondary focus:ring-1 focus:ring-secondary px-4 py-2 text-on-surface font-body-md text-right" dir="ltr" id="mobile" placeholder="05x xxx xxxx" type="tel"/>
+</div>
+<!-- Service Type -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2 text-right" for="service">نوع الخدمة</label>
+<select class="w-full bg-surface border border-outline-variant rounded focus:border-secondary focus:ring-1 focus:ring-secondary px-4 py-2 text-on-surface font-body-md" id="service">
+<option disabled="" selected="" value="">اختر الخدمة المطلوبة...</option>
+<option value="web">تطوير مواقع الويب</option>
+<option value="app">تطبيقات الجوال</option>
+<option value="erp">أنظمة إدارة الموارد (ERP)</option>
+<option value="consulting">استشارات تقنية</option>
+<option value="other">أخرى</option>
+</select>
+</div>
+</div>
+<!-- Message -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-2 text-right" for="message">رسالتك</label>
+<textarea class="w-full bg-surface border border-outline-variant rounded focus:border-secondary focus:ring-1 focus:ring-secondary px-4 py-2 text-on-surface font-body-md resize-none" id="message" placeholder="اكتب تفاصيل مشروعك أو استفسارك هنا..." rows="5"></textarea>
+</div>
+<!-- Submit Button -->
+<div class="flex justify-end pt-4">
+<button class="bg-secondary text-on-secondary px-8 py-3 rounded font-label-md text-label-md hover:bg-secondary-container hover:text-on-secondary-container transition-colors w-full md:w-auto shadow-sm flex items-center justify-center gap-2" type="submit">
+                                إرسال الرسالة
+                                <span class="material-symbols-outlined text-sm">send</span>
+</button>
+</div>
+</form>
+</div>
+<!-- Contact Info Sidebar (Left Side) -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<!-- Info Card -->
+<div class="bg-primary text-on-primary rounded-xl p-6 md:p-8 soft-shadow h-full">
+<h3 class="font-headline-md text-headline-md mb-stack-md text-right">معلومات الاتصال</h3>
+<div class="space-y-6">
+<!-- Email -->
+<div class="flex items-start gap-4 flex-row-reverse">
+<div class="bg-surface-tint/20 p-2 rounded-full flex-shrink-0">
+<span class="material-symbols-outlined text-secondary-fixed-dim" style="font-variation-settings: 'FILL' 1;">email</span>
+</div>
+<div class="text-right flex-grow">
+<p class="font-label-md text-label-md text-on-primary-fixed-variant mb-1">البريد الإلكتروني</p>
+<a class="font-body-md text-body-md hover:text-secondary-fixed-dim transition-colors block" dir="ltr" href="mailto:admin@mmit.sa">admin@mmit.sa</a>
+</div>
+</div>
+<!-- Phone -->
+<div class="flex items-start gap-4 flex-row-reverse">
+<div class="bg-surface-tint/20 p-2 rounded-full flex-shrink-0">
+<span class="material-symbols-outlined text-secondary-fixed-dim" style="font-variation-settings: 'FILL' 1;">call</span>
+</div>
+<div class="text-right flex-grow">
+<p class="font-label-md text-label-md text-on-primary-fixed-variant mb-1">رقم الهاتف</p>
+<a class="font-body-md text-body-md hover:text-secondary-fixed-dim transition-colors block" dir="ltr" href="tel:0536930366">053 693 0366</a>
+</div>
+</div>
+<!-- Location -->
+<div class="flex items-start gap-4 flex-row-reverse">
+<div class="bg-surface-tint/20 p-2 rounded-full flex-shrink-0">
+<span class="material-symbols-outlined text-secondary-fixed-dim" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+<div class="text-right flex-grow">
+<p class="font-label-md text-label-md text-on-primary-fixed-variant mb-1">العنوان</p>
+<p class="font-body-md text-body-md">المملكة العربية السعودية<br/>الرياض</p>
+</div>
+</div>
+</div>
+<!-- WhatsApp Action -->
+<div class="mt-stack-lg pt-6 border-t border-surface-tint/30 text-center">
+<p class="font-label-md text-label-md mb-4 text-on-primary-fixed-variant">نحن متاحون أيضاً عبر واتساب</p>
+<a class="inline-flex items-center justify-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-full font-label-md text-label-md hover:bg-[#128C7E] transition-colors w-full" href="https://wa.me/966536930366" target="_blank">
+<svg class="w-5 h-5" fill="currentColor" height="24" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.88-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.347-.272.297-1.04 1.016-1.04 2.479 0 1.463 1.065 2.876 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"></path>
+</svg>
+                                محادثة عبر واتساب
+                            </a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Map Section -->
+</main>
+<!-- Footer -->
+<section class="py-stack-lg bg-surface-container-low w-full">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-stack-md flex items-center justify-center gap-2 flex-row-reverse">
+<span class="material-symbols-outlined text-secondary">location_on</span>
+      موقعنا على الخريطة
+    </h2>
+<div class="relative w-full aspect-video md:h-[450px] bg-surface-container-highest border border-outline-variant rounded-xl overflow-hidden flex flex-col items-center justify-center soft-shadow mb-stack-sm">
+<div class="flex flex-col items-center gap-4 text-on-surface-variant">
+<span class="material-symbols-outlined text-[64px] text-outline">map</span>
+<p class="font-label-md text-label-md">سيتم عرض الخريطة التفاعلية هنا</p>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+      المملكة العربية السعودية، الرياض، حي الصحافة
+    </p>
+</div>
+</section><footer class="bg-primary text-on-primary full-width bottom flex flex-col items-center py-stack-lg px-margin-mobile md:px-margin-desktop w-full border-t-4 border-tertiary-fixed-dim">
+<div class="max-w-container-max w-full mx-auto flex flex-col md:flex-row justify-between items-center gap-stack-md">
+<!-- Brand -->
+<div class="text-headline-md font-display-lg text-on-primary flex items-center gap-2 flex-row-reverse">
+<span class="material-symbols-outlined text-tertiary-fixed-dim" style="font-variation-settings: 'FILL' 1;">api</span>
+                مسارات المستكشف
+            </div>
+<!-- Footer Links -->
+<nav class="flex flex-wrap justify-center gap-4 flex-row-reverse">
+<a class="font-label-md text-label-md text-surface-variant opacity-80 hover:text-secondary-fixed-dim transition-colors" href="#">الرئيسية</a>
+<a class="font-label-md text-label-md text-surface-variant opacity-80 hover:text-secondary-fixed-dim transition-colors" href="#">الخدمات</a>
+<a class="font-label-md text-label-md text-surface-variant opacity-80 hover:text-secondary-fixed-dim transition-colors" href="#">أعمالنا</a>
+<a class="font-label-md text-label-md text-surface-variant opacity-80 hover:text-secondary-fixed-dim transition-colors" href="#">من نحن</a>
+<a class="font-label-md text-label-md text-tertiary-fixed font-bold underline" href="#">تواصل معنا</a>
+<a class="font-label-md text-label-md text-surface-variant opacity-80 hover:text-secondary-fixed-dim transition-colors" href="#">سياسة الخصوصية</a>
+</nav>
+</div>
+<div class="w-full max-w-container-max mx-auto mt-stack-md pt-stack-sm border-t border-on-primary-fixed-variant text-center">
+<p class="font-body-md text-body-md text-surface-variant opacity-60">جميع الحقوق محفوظة لشركة مسارات المستكشف © 2024</p>
+</div>
+</footer>
+</body></html>

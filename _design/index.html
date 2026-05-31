@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>مسارات المستكشف — معرض الشاشات</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=Tajawal:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    theme: { extend: {
+      colors: { primary:'#030611', secondary:'#324cd6', surface:'#f8f9fa', 'on-surface':'#191c1d', 'surface-container':'#edeeef', outline:'#76777c' },
+      fontFamily: { head:['IBM Plex Sans Arabic'], body:['Tajawal'] }
+    }}
+  }
+</script>
+<style>
+  body { font-family: 'Tajawal', sans-serif; }
+  h1,h2,h3 { font-family: 'IBM Plex Sans Arabic', sans-serif; }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(3,6,17,0.12); border-color:#324cd6; }
+  .card { transition: all .2s ease; }
+</style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen">
+  <header class="bg-primary text-white">
+    <div class="max-w-[1280px] mx-auto px-6 md:px-16 py-10">
+      <div class="flex items-center gap-3 mb-3">
+        <span class="inline-block w-8 h-8 rounded bg-secondary"></span>
+        <span class="text-2xl font-head font-bold">مسارات المستكشف</span>
+      </div>
+      <h1 class="text-3xl md:text-4xl font-head font-bold leading-tight">معرض شاشات النظام</h1>
+      <p class="text-white/70 mt-3 max-w-2xl leading-relaxed">جميع شاشات الموقع المصمَّمة عبر Stitch — للاتصالات وتقنية المعلومات. اضغط أي بطاقة لمعاينة الصفحة كاملة.</p>
+      <p class="text-white/40 mt-2 text-sm">15 شاشة • تصميم RTL • IBM Plex Sans Arabic + Tajawal</p>
+    </div>
+  </header>
+
+  <main class="max-w-[1280px] mx-auto px-6 md:px-16 py-12 space-y-12">
+    <!-- sections injected by JS -->
+    <div id="groups" class="space-y-12"></div>
+  </main>
+
+  <footer class="border-t border-surface-container py-8 text-center text-outline text-sm">
+    مسارات المستكشف © 2024 — معرض الشاشات
+  </footer>
+
+<script>
+const GROUPS = [
+  { title: 'الصفحة الرئيسية (نسخ الهيرو)', items: [
+    { id:'_1',  name:'الرئيسية — هيرو (مركزي)' },
+    { id:'_9',  name:'الرئيسية — هيرو (شعار M)' },
+    { id:'cta', name:'الرئيسية — هيرو + دعوة للتحول الرقمي' },
+  ]},
+  { title: 'أقسام الصفحة الرئيسية', items: [
+    { id:'_3', name:'لماذا مسارات؟' },
+    { id:'_5', name:'منتجاتنا' },
+    { id:'_6', name:'خدماتنا السريعة' },
+  ]},
+  { title: 'الخدمات', items: [
+    { id:'_7', name:'خدماتنا' },
+    { id:'_2', name:'خدماتنا — حلول مخصصة' },
+    { id:'_4', name:'الأجهزة والأنظمة التقنية' },
+  ]},
+  { title: 'من نحن', items: [
+    { id:'hero', name:'من نحن (الصفحة الكاملة)' },
+    { id:'_10',  name:'من نحن — نسخة ٢' },
+    { id:'_11',  name:'من نحن — نسخة ٣' },
+  ]},
+  { title: 'أعمالنا والتواصل', items: [
+    { id:'_8',  name:'معرض أعمالنا ومشاريعنا' },
+    { id:'_13', name:'أعمالنا ومشاريعنا — نسخة ٢' },
+    { id:'_12', name:'تواصل معنا' },
+  ]},
+];
+
+const root = document.getElementById('groups');
+for (const g of GROUPS) {
+  const sec = document.createElement('section');
+  sec.innerHTML = `<h2 class="text-xl font-head font-semibold text-primary mb-5 pr-3 border-r-4 border-secondary">${g.title}</h2>`;
+  const grid = document.createElement('div');
+  grid.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6';
+  for (const it of g.items) {
+    const a = document.createElement('a');
+    a.href = `${it.id}/code.html`;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.className = 'card block bg-white rounded-xl border border-surface-container overflow-hidden';
+    a.innerHTML = `
+      <div class="aspect-[4/3] bg-surface-container overflow-hidden">
+        <img src="${it.id}/screen.png" alt="${it.name}" loading="lazy" class="w-full h-full object-cover object-top"/>
+      </div>
+      <div class="p-4 flex items-center justify-between">
+        <span class="font-head font-medium text-primary">${it.name}</span>
+        <span class="text-xs text-outline font-mono">${it.id}</span>
+      </div>`;
+    grid.appendChild(a);
+  }
+  sec.appendChild(grid);
+  root.appendChild(sec);
+}
+</script>
+</body>
+</html>

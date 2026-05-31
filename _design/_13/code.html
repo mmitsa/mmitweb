@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+
+<html class="light" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>أعمالنا - مسارات المستكشف</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=Tajawal:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#e1e3e4",
+                        "primary-fixed-dim": "#c2c6d6",
+                        "outline": "#76777c",
+                        "on-secondary-fixed-variant": "#1132c1",
+                        "on-primary-fixed": "#161b27",
+                        "on-tertiary-fixed": "#001f28",
+                        "tertiary": "#00080d",
+                        "on-background": "#191c1d",
+                        "secondary-fixed-dim": "#bbc3ff",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#828696",
+                        "inverse-surface": "#2e3132",
+                        "on-secondary-fixed": "#000f5c",
+                        "surface": "#f8f9fa",
+                        "secondary-fixed": "#dee0ff",
+                        "on-tertiary-fixed-variant": "#004e60",
+                        "surface-variant": "#e1e3e4",
+                        "primary": "#030611",
+                        "secondary": "#324cd6",
+                        "background": "#f8f9fa",
+                        "on-tertiary-container": "#0093b4",
+                        "outline-variant": "#c6c6cc",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#424754",
+                        "on-surface-variant": "#45464c",
+                        "surface-bright": "#f8f9fa",
+                        "primary-fixed": "#dee2f3",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#d9dadb",
+                        "inverse-primary": "#c2c6d6",
+                        "tertiary-container": "#00232d",
+                        "on-surface": "#191c1d",
+                        "tertiary-fixed-dim": "#4cd6ff",
+                        "surface-tint": "#595e6c",
+                        "surface-container": "#edeeef",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#f0f1f2",
+                        "surface-container-low": "#f3f4f5",
+                        "secondary-container": "#4e67f0",
+                        "tertiary-fixed": "#b7eaff",
+                        "on-secondary-container": "#fffbff",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#1a1f2b",
+                        "surface-container-high": "#e7e8e9",
+                        "status-active": "#e6f4ea",
+                        "status-active-text": "#1e8e3e",
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "margin-desktop": "64px",
+                        "stack-sm": "12px",
+                        "stack-md": "24px",
+                        "stack-lg": "48px",
+                        "margin-mobile": "20px",
+                        "container-max": "1280px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["IBM Plex Sans Arabic"],
+                        "body-md": ["Tajawal"],
+                        "headline-lg": ["IBM Plex Sans Arabic"],
+                        "body-lg": ["Tajawal"],
+                        "headline-md": ["IBM Plex Sans Arabic"],
+                        "label-md": ["IBM Plex Sans Arabic"],
+                        "caption": ["Tajawal"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", { "lineHeight": "60px", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .soft-shadow {
+            box-shadow: 0 4px 20px rgba(26, 31, 43, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col antialiased">
+<!-- TopNavBar Shared Component -->
+<header class="shadow-sm bg-surface sticky w-full top-0 z-50">
+<nav class="flex flex-row-reverse justify-between items-center px-margin-desktop max-w-container-max mx-auto w-full h-20">
+<!-- Brand -->
+<div class="flex items-center gap-2">
+<a class="text-headline-md font-display-lg text-primary" href="#">
+                    مسارات المستكشف
+                </a>
+</div>
+<!-- Navigation Links (Desktop) -->
+<div class="hidden md:flex items-center gap-8 flex-row-reverse">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">الرئيسية</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">الخدمات</a>
+<a class="font-label-md text-label-md text-secondary font-bold border-b-2 border-secondary pb-1 opacity-80 scale-95 transition-all" href="#">أعمالنا</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">من نحن</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors duration-200" href="#">تواصل معنا</a>
+</div>
+<!-- Action -->
+<div class="hidden md:block">
+<a class="bg-secondary text-on-primary font-label-md text-label-md px-6 py-3 rounded hover:bg-secondary-container transition-colors duration-200" href="#">
+                    اطلب عرض سعر
+                </a>
+</div>
+<!-- Mobile Menu Button -->
+<button class="md:hidden text-primary p-2">
+<span class="material-symbols-outlined text-2xl" data-icon="menu">menu</span>
+</button>
+</nav>
+</header>
+<main class="flex-grow">
+<!-- Hero Section -->
+<section class="py-stack-lg px-margin-mobile md:px-margin-desktop bg-surface-container-lowest">
+<div class="max-w-container-max mx-auto text-center space-y-stack-sm">
+<h1 class="font-display-lg text-display-lg text-primary">أعمالنا ومشاريعنا</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                    نستعرض هنا أبرز المشاريع التي قمنا بتنفيذها وإدارتها في قطاع الاتصالات وتقنية المعلومات، والتي تعكس التزامنا بتقديم حلول متطورة وموثوقة لعملائنا في مختلف القطاعات.
+                </p><div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mt-stack-lg max-w-4xl mx-auto">
+<div class="p-6 rounded-xl bg-surface-container-low border border-outline-variant flex flex-col items-center text-center">
+<span class="text-display-lg font-display-lg text-secondary">50+</span>
+<span class="font-label-md text-label-md text-on-surface-variant">مشاريع منفذة</span>
+</div>
+<div class="p-6 rounded-xl bg-surface-container-low border border-outline-variant flex flex-col items-center text-center">
+<span class="text-display-lg font-display-lg text-secondary">100+</span>
+<span class="font-label-md text-label-md text-on-surface-variant">عملاء سعداء</span>
+</div>
+<div class="p-6 rounded-xl bg-surface-container-low border border-outline-variant flex flex-col items-center text-center">
+<span class="text-display-lg font-display-lg text-secondary">10+</span>
+<span class="font-label-md text-label-md text-on-surface-variant">سنوات خبرة</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Project Gallery (Bento Grid Style) -->
+<section class="py-stack-md px-margin-mobile md:px-margin-desktop">
+<div class="max-w-container-max mx-auto">
+<!-- Filters -->
+<div class="flex flex-wrap gap-4 justify-center mb-stack-md">
+<button class="px-4 py-2 rounded-full border border-secondary text-secondary bg-secondary/10 font-label-md text-label-md">الكل</button>
+<button class="px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors">صيانة تقنية</button>
+<button class="px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors">تطوير برمجيات</button>
+<button class="px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors">أنظمة مراقبة</button>
+</div>
+<!-- Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Featured Card -->
+<div class="md:col-span-2 bg-surface rounded-xl soft-shadow border-t-4 border-secondary overflow-hidden group hover:shadow-lg transition-shadow duration-300">
+<div class="relative h-64 bg-surface-container overflow-hidden">
+<img alt="Project Image" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A modern, high-tech server room bathed in cool blue and crisp white lighting, representing enterprise IT infrastructure. Row upon row of sleek server racks line the pristine facility. The aesthetic is clean, corporate, and highly organized, emphasizing stability and advanced technology. The mood is professional and cutting-edge." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBNLt2uiglYVU_Y3OkULI6RLcqJi7HN9t3AU6VhlJizF-SsylNGab1JxapTMT59ZvrobzX-VPAPQVlcSWONph6R2D8bjCBi00iw-wL5TuX304qzc3bQcpCi65KZjlZNiM_qUiVPR6KmlAvWyhMySogGv9L5ntjo2ZQUafPPYm2nXQorVeku5uvScM3Mlxmxtq1R6EHqJ9tjtj6BKYIigz6jUJJPeWNXiFQfgFCoIOl0Z2WV-py4MQ_GVBjeME-F_TntFKrcR6anE5-"/>
+<div class="absolute top-4 right-4 bg-surface/90 backdrop-blur-sm px-3 py-1 rounded-full font-caption text-caption text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="check_circle">check_circle</span>
+                                 مكتمل
+                             </div>
+</div>
+<div class="p-6">
+<h3 class="font-headline-md text-headline-md text-primary mb-2">إدارة نظام إلكتروني للمخزون والأصول</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">المركز السعودي لكفاءة الطاقة</p>
+<a class="text-secondary font-label-md text-label-md inline-flex items-center gap-1 hover:underline" href="#">
+                                تفاصيل المشروع <span class="material-symbols-outlined text-[18px]" data-icon="arrow_back">arrow_back</span>
+</a>
+</div>
+</div>
+<!-- Standard Cards -->
+<div class="bg-surface rounded-xl soft-shadow border-t-4 border-tertiary-fixed-dim overflow-hidden hover:shadow-lg transition-shadow duration-300">
+<div class="p-6 h-full flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 bg-surface-container rounded-lg flex items-center justify-center text-tertiary-fixed-dim mb-4">
+<span class="material-symbols-outlined text-3xl" data-icon="videocam">videocam</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-2 text-xl">صيانة وتوريد كاميرات المراقبة</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">بلدية تربة منطقة حائل</p>
+</div>
+<div class="mt-4 flex items-center gap-2">
+<span class="inline-block w-2 h-2 rounded-full bg-green-500"></span>
+<span class="font-caption text-caption text-on-surface-variant">قائم</span>
+</div>
+</div>
+</div>
+<div class="bg-surface rounded-xl soft-shadow border-t-4 border-secondary overflow-hidden hover:shadow-lg transition-shadow duration-300">
+<div class="p-6 h-full flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 bg-surface-container rounded-lg flex items-center justify-center text-secondary mb-4">
+<span class="material-symbols-outlined text-3xl" data-icon="build">build</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-2 text-xl">تطوير الخدمات التقنية بالمرافق</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">بلدية محافظة بقعاء</p>
+</div>
+<div class="mt-4 flex items-center gap-2">
+<span class="inline-block w-2 h-2 rounded-full bg-green-500"></span>
+<span class="font-caption text-caption text-on-surface-variant">قائم</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Professional Table Section -->
+<section class="py-stack-lg px-margin-mobile md:px-margin-desktop bg-surface-container-lowest">
+<div class="max-w-container-max mx-auto">
+<div class="flex items-center gap-3 mb-stack-md">
+<span class="material-symbols-outlined text-secondary text-3xl" data-icon="table_chart">table_chart</span>
+<h2 class="font-headline-lg text-headline-lg text-primary">سابقة الأعمال</h2>
+</div>
+<div class="bg-surface rounded-xl soft-shadow border border-surface-container-highest overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-right border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b 2 border-surface-container-highest">
+<th class="py-4 px-6 font-label-md text-label-md text-on-surface-variant whitespace-nowrap">الجهة</th>
+<th class="py-4 px-6 font-label-md text-label-md text-on-surface-variant">وصف العمل</th>
+<th class="py-4 px-6 font-label-md text-label-md text-on-surface-variant whitespace-nowrap">الحالة</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md text-primary">
+<!-- Highlighted Rows -->
+<tr class="border-b border-surface-container-highest hover:bg-surface-container-low transition-colors bg-status-active/30">
+<td class="py-4 px-6 font-medium">بلدية محافظة بقعاء</td>
+<td class="py-4 px-6 text-on-surface-variant">صيانة وتطوير الخدمات التقنية بالمرافق</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-status-active text-status-active-text">
+                                            قائم
+                                        </span>
+</td>
+</tr>
+<tr class="border-b border-surface-container-highest hover:bg-surface-container-low transition-colors bg-status-active/30">
+<td class="py-4 px-6 font-medium">بلدية تربة منطقة حائل</td>
+<td class="py-4 px-6 text-on-surface-variant">صيانة وتوريد وتركيب كاميرات للحدائق العامة والمباني</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-status-active text-status-active-text">
+                                            قائم
+                                        </span>
+</td>
+</tr>
+<tr class="border-b border-surface-container-highest hover:bg-surface-container-low transition-colors bg-status-active/30">
+<td class="py-4 px-6 font-medium">إدارة الخدمات العامة المركز السعودي لكفاءة الطاقة</td>
+<td class="py-4 px-6 text-on-surface-variant">إدارة نظام إلكتروني للمخزون والأصول (خمس مراحل)</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-status-active text-status-active-text">
+                                            قائم
+                                        </span>
+</td>
+</tr>
+<!-- Standard Rows -->
+<tr class="border-b border-surface-container-highest hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-6 font-medium">وزارة الداخلية مستشفى قوى الأمن</td>
+<td class="py-4 px-6 text-on-surface-variant">تأمين أقراص صلبة لأجهزة التخزين</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-surface-container text-on-surface-variant">
+                                            منتهي
+                                        </span>
+</td>
+</tr>
+<tr class="border-b border-surface-container-highest hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-6 font-medium">وزارة الصحة منطقة القصيم</td>
+<td class="py-4 px-6 text-on-surface-variant">توريد وتركيب أجهزة مراكز المختبر الإقليمي</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-surface-container text-on-surface-variant">منتهي</span>
+</td>
+</tr>
+<tr class="border-b border-surface-container-highest hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-6 font-medium">بلدية محافظة بقعاء</td>
+<td class="py-4 px-6 text-on-surface-variant">عقد صيانة الكمبيوترات</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-surface-container text-on-surface-variant">منتهي</span>
+</td>
+</tr>
+<tr class="border-b border-surface-container-highest hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-6 font-medium">بلدية محافظة بقعاء</td>
+<td class="py-4 px-6 text-on-surface-variant">صيانة كاميرات مراقبة شبكية</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-surface-container text-on-surface-variant">منتهي</span>
+</td>
+</tr>
+<tr class="border-b border-surface-container-highest hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-6 font-medium">بلدية محافظة بقعاء</td>
+<td class="py-4 px-6 text-on-surface-variant">صيانة شبكة الحاسب الآلي والطابعات</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-surface-container text-on-surface-variant">منتهي</span>
+</td>
+</tr>
+<tr class="border-b border-surface-container-highest hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-6 font-medium">بلدية محافظة بقعاء</td>
+<td class="py-4 px-6 text-on-surface-variant">تطوير وتوريد البرمجيات والتطبيقات</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-surface-container text-on-surface-variant">منتهي</span>
+</td>
+</tr>
+<tr class="border-b border-surface-container-highest hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-6 font-medium">بلدية محافظة بقعاء</td>
+<td class="py-4 px-6 text-on-surface-variant">تطوير وصيانة وتوريد البرمجيات</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-surface-container text-on-surface-variant">منتهي</span>
+</td>
+</tr>
+<tr class="border-b border-surface-container-highest hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-6 font-medium">بلدية محافظة بقعاء</td>
+<td class="py-4 px-6 text-on-surface-variant">توريد أجهزة تقنية ومستلزماتها</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-surface-container text-on-surface-variant">منتهي</span>
+</td>
+</tr>
+<tr class="border-b border-surface-container-highest hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-6 font-medium">بلدية محافظة بقعاء</td>
+<td class="py-4 px-6 text-on-surface-variant">توريد وتركيب وصيانة أجهزة الحاسب وشبكات الاتصالات</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-surface-container text-on-surface-variant">منتهي</span>
+</td>
+</tr>
+<tr class="border-b border-surface-container-highest hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-6 font-medium">بلدية محافظة بقعاء</td>
+<td class="py-4 px-6 text-on-surface-variant">توريد وتركيب نظام كاميرات المراقبة بالمواقع</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-surface-container text-on-surface-variant">منتهي</span>
+</td>
+</tr>
+<tr class="border-b border-surface-container-highest hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-6 font-medium">بلدية محافظة بقعاء</td>
+<td class="py-4 px-6 text-on-surface-variant">توريد وتركيب كاميرات المراقبة بالميادين</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-surface-container text-on-surface-variant">منتهي</span>
+</td>
+</tr>
+<tr class="border-b border-surface-container-highest hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-6 font-medium">بلدية محافظة بقعاء</td>
+<td class="py-4 px-6 text-on-surface-variant">صيانة أجهزة الحاسب والطابعات وكاميرات المراقبة</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-surface-container text-on-surface-variant">منتهي</span>
+</td>
+</tr>
+<tr class="border-b border-surface-container-highest hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-6 font-medium">بلدية محافظة بقعاء</td>
+<td class="py-4 px-6 text-on-surface-variant">صيانة أجهزة الحاسب والطابعات وشاشات الكمبيوتر</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-surface-container text-on-surface-variant">منتهي</span>
+</td>
+</tr>
+<tr class="border-b border-surface-container-highest hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-6 font-medium">بلدية جدة</td>
+<td class="py-4 px-6 text-on-surface-variant">تقديم وتطوير الخدمات الرقمية والتطبيقات التقنية</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-surface-container text-on-surface-variant">منتهي</span>
+</td>
+</tr>
+<tr class="border-b border-surface-container-highest hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-6 font-medium">بلدية محافظة بقعاء</td>
+<td class="py-4 px-6 text-on-surface-variant">صيانة كاميرات المراقبة الشبكية</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-surface-container text-on-surface-variant">منتهي</span>
+</td>
+</tr>
+<tr class="border-b-0 hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-6 font-medium rounded-br-lg">أمانة منطقة الجوف</td>
+<td class="py-4 px-6 text-on-surface-variant">توريد وتركيب وصيانة أجهزة الحاسب والطابعات والمحولات الشبكية</td>
+<td class="py-4 px-6 rounded-bl-lg">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-surface-container text-on-surface-variant">منتهي</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Shared Component -->
+<footer class="bg-primary flex flex-col items-center py-stack-lg px-margin-desktop w-full">
+<div class="max-w-container-max mx-auto w-full flex flex-col items-center gap-stack-md">
+<!-- Brand Logo -->
+<div class="text-headline-md font-display-lg text-on-primary text-center">
+                مسارات المستكشف
+            </div>
+<!-- Links -->
+<div class="flex flex-wrap justify-center gap-6 gap-y-4">
+<a class="font-label-md text-label-md text-surface-variant opacity-80 hover:text-secondary-fixed-dim transition-colors" href="#">الرئيسية</a>
+<a class="font-label-md text-label-md text-surface-variant opacity-80 hover:text-secondary-fixed-dim transition-colors" href="#">الخدمات</a>
+<a class="font-label-md text-label-md text-tertiary-fixed font-bold underline hover:text-secondary-fixed-dim transition-colors" href="#">أعمالنا</a>
+<a class="font-label-md text-label-md text-surface-variant opacity-80 hover:text-secondary-fixed-dim transition-colors" href="#">من نحن</a>
+<a class="font-label-md text-label-md text-surface-variant opacity-80 hover:text-secondary-fixed-dim transition-colors" href="#">تواصل معنا</a>
+<a class="font-label-md text-label-md text-surface-variant opacity-80 hover:text-secondary-fixed-dim transition-colors" href="#">سياسة الخصوصية</a>
+</div>
+<!-- Copyright -->
+<div class="font-body-md text-body-md text-on-primary text-center mt-stack-sm border-t border-surface-tint pt-stack-sm w-full max-w-lg">
+                جميع الحقوق محفوظة لشركة مسارات المستكشف © 2024
+            </div>
+</div>
+</footer>
+</body></html>

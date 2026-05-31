@@ -1,0 +1,49 @@
+import type { Metadata } from "next";
+import { Container } from "@/components/container";
+import { ButtonLink } from "@/components/button";
+import { PageHero } from "@/components/section";
+import { ServiceCard } from "@/components/cards";
+import { services } from "@/lib/site";
+
+export const metadata: Metadata = { title: "الخدمات" };
+
+export default function ServicesPage() {
+  return (
+    <>
+      <PageHero
+        title="خدماتنا"
+        subtitle="نقدم في مسارات المستكشف مجموعة متكاملة من الحلول التقنية المتقدمة، مصممة خصيصًا لتلبية احتياجات قطاع الأعمال والارتقاء بكفاءة العمليات التشغيلية نحو مستقبل رقمي مستدام."
+      />
+
+      <section className="py-16">
+        <Container>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {services.map((s) => (
+              <ServiceCard key={s.title} service={s} />
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <section className="border-t border-outline-variant/30 bg-surface-container-high py-16">
+        <Container className="flex flex-col items-center text-center">
+          <h2 className="text-3xl font-head font-semibold text-primary">
+            هل تبحث عن حلول تقنية مخصصة؟
+          </h2>
+          <p className="mt-3 max-w-2xl text-on-surface-variant">
+            فريق خبرائنا جاهز لتقديم استشارات تقنية تناسب متطلبات أعمالك بدقة
+            واحترافية.
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <ButtonLink href="/contact" variant="primary">
+              تواصل معنا الآن
+            </ButtonLink>
+            <ButtonLink href="/contact" variant="outline">
+              طلب استشارة
+            </ButtonLink>
+          </div>
+        </Container>
+      </section>
+    </>
+  );
+}
