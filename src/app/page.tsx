@@ -8,6 +8,7 @@ import { Eyebrow, SectionHeading } from "@/components/section";
 import { ServiceCard, ProductCard, AdvantageCard } from "@/components/cards";
 import { Stats, ClientsStrip } from "@/components/stats";
 import { Process } from "@/components/process";
+import { Sectors } from "@/components/sectors";
 import { advantages, products, services } from "@/lib/site";
 
 export default function HomePage() {
@@ -160,6 +161,9 @@ export default function HomePage() {
 
       {/* ── Process ──────────────────────────────────────── */}
       <Process />
+
+      {/* ── Sectors ──────────────────────────────────────── */}
+      <Sectors />
 
       {/* ── Clients ──────────────────────────────────────── */}
       <ClientsStrip />

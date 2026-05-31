@@ -66,12 +66,20 @@ export function Footer() {
         <p className="text-sm text-surface-variant opacity-60">
           جميع الحقوق محفوظة لشركة {site.name} © 2024
         </p>
-        <Link
-          href="/privacy"
-          className="text-sm text-surface-variant opacity-80 transition-colors hover:text-secondary-fixed-dim"
-        >
-          سياسة الخصوصية
-        </Link>
+        <div className="flex items-center gap-6">
+          <Link
+            href="/faq"
+            className="text-sm text-surface-variant opacity-80 transition-colors hover:text-secondary-fixed-dim"
+          >
+            الأسئلة الشائعة
+          </Link>
+          <Link
+            href="/privacy"
+            className="text-sm text-surface-variant opacity-80 transition-colors hover:text-secondary-fixed-dim"
+          >
+            سياسة الخصوصية
+          </Link>
+        </div>
       </div>
     </footer>
   );
