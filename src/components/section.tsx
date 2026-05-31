@@ -1,4 +1,5 @@
 import { Container } from "@/components/container";
+import { PathsBackdrop } from "@/components/paths";
 import { cn } from "@/lib/utils";
 
 export function Eyebrow({
@@ -34,9 +35,9 @@ export function PageHero({
   eyebrow?: string;
 }) {
   return (
-    <section className="relative overflow-hidden border-b border-outline-variant/30 bg-surface-container-lowest py-20 md:py-28">
-      <div className="bg-dots pointer-events-none absolute inset-0 opacity-70" />
-      <div className="pointer-events-none absolute -left-24 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full bg-secondary/10 blur-3xl" />
+    <section className="paths-surface relative overflow-hidden border-b border-outline-variant/30 bg-surface-container-lowest py-20 md:py-28">
+      <div className="bg-dots pointer-events-none absolute inset-0 opacity-40" />
+      <PathsBackdrop className="opacity-60" />
       <Container className="relative z-10 text-center">
         <div className="animate-fade-up">
           {eyebrow && (
