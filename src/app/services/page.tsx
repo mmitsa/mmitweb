@@ -3,6 +3,7 @@ import { Container } from "@/components/container";
 import { ButtonLink } from "@/components/button";
 import { PageHero } from "@/components/section";
 import { ServiceCard } from "@/components/cards";
+import { Reveal } from "@/components/reveal";
 import { services } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -23,8 +24,10 @@ export default function ServicesPage() {
       <section className="py-16">
         <Container>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {services.map((s) => (
-              <ServiceCard key={s.title} service={s} />
+            {services.map((s, i) => (
+              <Reveal key={s.slug} delay={(i % 4) * 80}>
+                <ServiceCard service={s} />
+              </Reveal>
             ))}
           </div>
         </Container>

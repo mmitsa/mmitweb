@@ -3,6 +3,7 @@ import { Container } from "@/components/container";
 import { ButtonLink } from "@/components/button";
 import { Icon } from "@/components/icon";
 import { PageHero } from "@/components/section";
+import { Reveal } from "@/components/reveal";
 import { partners, projects, site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -27,12 +28,12 @@ export default function PartnersPage() {
       <section className="py-16">
         <Container>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {partners.map((partner) => {
+            {partners.map((partner, i) => {
               const count = projectCount(partner.name);
               return (
+                <Reveal key={partner.name} delay={(i % 3) * 80}>
                 <div
-                  key={partner.name}
-                  className="flex flex-col items-center rounded-xl border border-outline-variant/20 bg-surface-container-lowest p-8 text-center soft-shadow transition-all hover:-translate-y-1 hover:shadow-lg"
+                  className="flex h-full flex-col items-center rounded-xl border border-outline-variant/20 bg-surface-container-lowest p-8 text-center soft-shadow transition-all hover:-translate-y-1 hover:shadow-lg"
                 >
                   <div className="flex h-24 w-24 items-center justify-center rounded-2xl bg-surface-container">
                     {partner.logo ? (
@@ -57,6 +58,7 @@ export default function PartnersPage() {
                     </span>
                   )}
                 </div>
+                </Reveal>
               );
             })}
           </div>

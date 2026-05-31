@@ -4,6 +4,7 @@ import { ButtonLink } from "@/components/button";
 import { Icon } from "@/components/icon";
 import { PageHero } from "@/components/section";
 import { ProductCard } from "@/components/cards";
+import { Reveal } from "@/components/reveal";
 import { products } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -24,8 +25,10 @@ export default function ProductsPage() {
       <section className="py-16">
         <Container>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {products.map((p) => (
-              <ProductCard key={p.title} product={p} />
+            {products.map((p, i) => (
+              <Reveal key={p.slug} delay={(i % 3) * 90}>
+                <ProductCard product={p} />
+              </Reveal>
             ))}
           </div>
         </Container>

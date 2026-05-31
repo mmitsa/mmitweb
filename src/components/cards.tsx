@@ -5,7 +5,8 @@ import type { Advantage, Product, Service } from "@/lib/site";
 
 export function ServiceCard({ service }: { service: Service }) {
   return (
-    <div
+    <Link
+      href={`/services/${service.slug}`}
       className={cn(
         "card-hover group flex h-full flex-col rounded-xl border border-outline-variant/15 border-t-4 bg-surface-container-lowest p-6 soft-shadow",
         service.accent === "secondary" ? "border-t-secondary" : "border-t-primary"
@@ -27,7 +28,11 @@ export function ServiceCard({ service }: { service: Service }) {
       <p className="flex-grow leading-relaxed text-on-surface-variant">
         {service.description}
       </p>
-    </div>
+      <span className="mt-4 inline-flex items-center gap-1 font-head text-sm font-medium text-secondary">
+        التفاصيل
+        <Icon name="arrow_back" className="cta-arrow text-[18px]" />
+      </span>
+    </Link>
   );
 }
 
