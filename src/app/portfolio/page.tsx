@@ -5,7 +5,11 @@ import { PageHero } from "@/components/section";
 import { cn } from "@/lib/utils";
 import { projects } from "@/lib/site";
 
-export const metadata: Metadata = { title: "أعمالنا" };
+export const metadata: Metadata = {
+  title: "أعمالنا",
+  description:
+    "سابقة أعمال مسارات المستكشف مع الجهات الحكومية والمؤسسات: مشاريع صيانة تقنية، تطوير برمجيات، وأنظمة مراقبة في مختلف مناطق المملكة.",
+};
 
 const featured = [
   {

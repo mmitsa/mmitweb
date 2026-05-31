@@ -5,7 +5,11 @@ import { SectionHeading } from "@/components/section";
 import { ProductCard } from "@/components/cards";
 import { products } from "@/lib/site";
 
-export const metadata: Metadata = { title: "من نحن" };
+export const metadata: Metadata = {
+  title: "من نحن",
+  description:
+    "تعرّف على مسارات المستكشف: رؤيتنا ورسالتنا وقيمنا، ومجالات عملنا في الاتصالات وتقنية المعلومات والأمن السيبراني والتحول الرقمي بالمملكة.",
+};
 
 const values = [
   { icon: "verified_user", label: "الالتزام" },

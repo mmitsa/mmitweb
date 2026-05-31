@@ -5,7 +5,11 @@ import { PageHero } from "@/components/section";
 import { ContactForm } from "@/components/contact-form";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = { title: "تواصل معنا" };
+export const metadata: Metadata = {
+  title: "تواصل معنا",
+  description:
+    "تواصل مع فريق مسارات المستكشف عبر النموذج أو الهاتف أو واتساب أو البريد الإلكتروني للحصول على استشارة تقنية أو عرض سعر.",
+};
 
 export default function ContactPage() {
   return (
@@ -74,11 +78,15 @@ export default function ContactPage() {
             <Icon name="location_on" className="text-secondary" />
             موقعنا على الخريطة
           </h2>
-          <div className="mb-3 flex aspect-video w-full flex-col items-center justify-center overflow-hidden rounded-xl border border-outline-variant bg-surface-container-highest soft-shadow md:h-[450px]">
-            <Icon name="map" className="text-[64px] text-outline" />
-            <p className="mt-4 font-head text-sm text-on-surface-variant">
-              سيتم عرض الخريطة التفاعلية هنا
-            </p>
+          <div className="mb-3 aspect-video w-full overflow-hidden rounded-xl border border-outline-variant bg-surface-container-highest soft-shadow md:h-[450px]">
+            <iframe
+              title="موقع مسارات المستكشف على الخريطة"
+              src="https://www.google.com/maps?q=%D8%AD%D9%8A%20%D8%A7%D9%84%D8%B5%D8%AD%D8%A7%D9%81%D8%A9%D8%8C%20%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6&output=embed"
+              className="h-full w-full border-0"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
           </div>
           <p className="text-on-surface-variant">{site.address}</p>
         </Container>

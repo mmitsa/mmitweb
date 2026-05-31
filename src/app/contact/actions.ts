@@ -1,8 +1,24 @@
 "use server";
 
+import { headers } from "next/headers";
 import { Resend } from "resend";
 import { z } from "zod";
 import { site } from "@/lib/site";
+
+// Basic in-memory rate limiter (per server instance). For multi-instance
+// production, back this with a shared store (e.g. Upstash Redis).
+const RATE_LIMIT = 5;
+const WINDOW_MS = 10 * 60 * 1000;
+const hits = new Map<string, number[]>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const recent = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
+  hits.set(ip, recent);
+  if (recent.length >= RATE_LIMIT) return true;
+  recent.push(now);
+  return false;
+}
 
 const schema = z.object({
   name: z.string().trim().min(2, "الرجاء إدخال الاسم الكامل"),
@@ -22,6 +38,24 @@ export async function submitContact(
   _prev: ContactState,
   formData: FormData
 ): Promise<ContactState> {
+  // Honeypot: real users never fill this hidden field.
+  if (typeof formData.get("company") === "string" && formData.get("company")) {
+    return { status: "success", message: "تم استلام رسالتك بنجاح." };
+  }
+
+  // Rate limit by client IP.
+  const hdrs = await headers();
+  const ip =
+    (hdrs.get("x-forwarded-for") ?? "").split(",")[0].trim() ||
+    hdrs.get("x-real-ip") ||
+    "unknown";
+  if (isRateLimited(ip)) {
+    return {
+      status: "error",
+      message: "لقد أرسلت عدة رسائل خلال فترة قصيرة. الرجاء المحاولة بعد قليل.",
+    };
+  }
+
   const parsed = schema.safeParse({
     name: formData.get("name"),
     email: formData.get("email"),

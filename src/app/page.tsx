@@ -4,6 +4,7 @@ import { ButtonLink } from "@/components/button";
 import { Icon } from "@/components/icon";
 import { SectionHeading } from "@/components/section";
 import { ServiceCard, ProductCard, AdvantageCard } from "@/components/cards";
+import { Stats, ClientsStrip } from "@/components/stats";
 import { advantages, products, services } from "@/lib/site";
 
 export default function HomePage() {
@@ -59,6 +60,9 @@ export default function HomePage() {
         </Container>
       </section>
 
+      {/* Stats */}
+      <Stats />
+
       {/* Why us */}
       <section className="bg-surface-container-low py-16">
         <Container>
@@ -112,6 +116,9 @@ export default function HomePage() {
           </div>
         </Container>
       </section>
+
+      {/* Clients */}
+      <ClientsStrip />
 
       {/* CTA */}
       <section className="bg-secondary py-16 text-on-secondary">

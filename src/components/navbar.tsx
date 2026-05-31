@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Icon } from "@/components/icon";
+import { Logo } from "@/components/logo";
 import { cn } from "@/lib/utils";
 import { navItems, site } from "@/lib/site";
 
@@ -22,7 +23,7 @@ export function Navbar() {
           href="/"
           className="flex items-center gap-2 text-2xl font-head font-bold text-primary transition-opacity hover:opacity-80"
         >
-          <Icon name="explore" filled className="text-secondary" />
+          <Logo className="h-9 w-9" />
           <span>{site.name}</span>
         </Link>
 

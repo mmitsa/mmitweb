@@ -1,6 +1,7 @@
 export const site = {
   name: "مسارات المستكشف",
   tagline: "للاتصالات وتقنية المعلومات",
+  url: "https://mmit.sa",
   email: "admin@mmit.sa",
   phone: "0536930366",
   phoneDisplay: "053 693 0366",

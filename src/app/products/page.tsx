@@ -6,7 +6,11 @@ import { PageHero } from "@/components/section";
 import { ProductCard } from "@/components/cards";
 import { products } from "@/lib/site";
 
-export const metadata: Metadata = { title: "منتجاتنا" };
+export const metadata: Metadata = {
+  title: "منتجاتنا",
+  description:
+    "منظومة «مسارات» من الأنظمة الرقمية المتكاملة: مسارات HR، سداد، أرشفة، مستودعات، دعم، تحليل، وأملاك.",
+};
 
 export default function ProductsPage() {
   return (

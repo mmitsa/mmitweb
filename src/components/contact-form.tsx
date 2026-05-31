@@ -61,6 +61,11 @@ export function ContactForm() {
       )}
 
       <form className="space-y-6" action={formAction}>
+        {/* Honeypot — hidden from real users, traps bots */}
+        <div className="absolute left-[-9999px]" aria-hidden="true">
+          <label htmlFor="company">الشركة</label>
+          <input id="company" name="company" type="text" tabIndex={-1} autoComplete="off" />
+        </div>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div>
             <label htmlFor="name" className="mb-2 block font-head text-sm text-on-surface-variant">

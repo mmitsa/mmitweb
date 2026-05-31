@@ -5,7 +5,11 @@ import { PageHero } from "@/components/section";
 import { ServiceCard } from "@/components/cards";
 import { services } from "@/lib/site";
 
-export const metadata: Metadata = { title: "الخدمات" };
+export const metadata: Metadata = {
+  title: "الخدمات",
+  description:
+    "حلول الاتصالات والشبكات، البنية التحتية لتقنية المعلومات، الأمن السيبراني، التحول الرقمي، الأنظمة الذكية، والدعم الفني من مسارات المستكشف.",
+};
 
 export default function ServicesPage() {
   return (
