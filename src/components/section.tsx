@@ -1,32 +1,59 @@
 import { Container } from "@/components/container";
 import { cn } from "@/lib/utils";
 
+export function Eyebrow({
+  children,
+  className,
+  light,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  light?: boolean;
+}) {
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center gap-2 font-head text-sm font-semibold tracking-wide",
+        light ? "text-tertiary-fixed-dim" : "text-secondary",
+        className
+      )}
+    >
+      <span className="h-2 w-2 rotate-45 bg-current" />
+      {children}
+    </span>
+  );
+}
+
 export function PageHero({
   title,
   subtitle,
+  eyebrow,
 }: {
   title: string;
   subtitle?: string;
+  eyebrow?: string;
 }) {
   return (
-    <section className="relative overflow-hidden border-b border-outline-variant/30 bg-surface-container-lowest py-20 md:py-24">
-      <div
-        className="pointer-events-none absolute inset-0 opacity-5"
-        style={{
-          backgroundImage: "radial-gradient(#324cd6 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
-        }}
-      />
+    <section className="relative overflow-hidden border-b border-outline-variant/30 bg-surface-container-lowest py-20 md:py-28">
+      <div className="bg-dots pointer-events-none absolute inset-0 opacity-70" />
+      <div className="pointer-events-none absolute -left-24 top-1/2 h-72 w-72 -translate-y-1/2 rounded-full bg-secondary/10 blur-3xl" />
       <Container className="relative z-10 text-center">
-        <h1 className="text-4xl font-head font-bold text-primary md:text-5xl">
-          {title}
-        </h1>
-        <div className="mx-auto mt-4 h-1.5 w-16 rounded-full bg-secondary" />
-        {subtitle && (
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-on-surface-variant">
-            {subtitle}
-          </p>
-        )}
+        <div className="animate-fade-up">
+          {eyebrow && (
+            <div className="mb-4 flex justify-center">
+              <Eyebrow>{eyebrow}</Eyebrow>
+            </div>
+          )}
+          <h1 className="text-4xl font-head font-bold text-primary md:text-5xl">
+            {title}
+          </h1>
+          <div className="mx-auto mt-5 h-1.5 w-20 rounded-full bg-gradient-to-l from-secondary to-tertiary-fixed-dim" />
+          {subtitle && (
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-on-surface-variant">
+              {subtitle}
+            </p>
+          )}
+        </div>
       </Container>
     </section>
   );
@@ -35,20 +62,29 @@ export function PageHero({
 export function SectionHeading({
   title,
   subtitle,
+  eyebrow,
   centered,
   className,
 }: {
   title: string;
   subtitle?: string;
+  eyebrow?: string;
   centered?: boolean;
   className?: string;
 }) {
   return (
     <div className={cn(centered ? "text-center" : "text-right", className)}>
-      <h2 className="text-3xl font-head font-semibold text-primary">{title}</h2>
+      {eyebrow && (
+        <div className={cn("mb-3", centered && "flex justify-center")}>
+          <Eyebrow>{eyebrow}</Eyebrow>
+        </div>
+      )}
+      <h2 className="text-3xl font-head font-semibold text-primary md:text-4xl">
+        {title}
+      </h2>
       <div
         className={cn(
-          "mt-3 h-1.5 w-16 rounded-full bg-secondary",
+          "mt-3 h-1.5 w-16 rounded-full bg-gradient-to-l from-secondary to-tertiary-fixed-dim",
           centered && "mx-auto"
         )}
       />

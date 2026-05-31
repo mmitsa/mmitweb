@@ -84,8 +84,113 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-on-secondary-fixed);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
 .soft-shadow {
   box-shadow: 0 4px 20px rgba(26, 31, 43, 0.05);
+}
+
+/* ── Decorative backgrounds ───────────────────────────── */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(118, 119, 124, 0.10) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(118, 119, 124, 0.10) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+.bg-grid-light {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+.bg-dots {
+  background-image: radial-gradient(rgba(50, 76, 214, 0.16) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+.bg-diagonal {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 11px,
+    rgba(255, 255, 255, 0.045) 11px,
+    rgba(255, 255, 255, 0.045) 22px
+  );
+}
+
+/* ── Accents ──────────────────────────────────────────── */
+.text-gradient {
+  background: linear-gradient(110deg, #4e67f0 0%, #4cd6ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.shadow-glow {
+  box-shadow: 0 18px 50px -16px rgba(50, 76, 214, 0.5);
+}
+
+/* Card hover lift */
+.card-hover {
+  transition: transform 0.28s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.28s ease, border-color 0.28s ease;
+}
+.card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 44px -16px rgba(3, 6, 17, 0.22);
+}
+
+/* Animated CTA arrow */
+.cta-arrow {
+  transition: transform 0.25s ease;
+}
+.group:hover .cta-arrow {
+  transform: translateX(-6px);
+}
+
+/* ── Motion ───────────────────────────────────────────── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(26px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+.animate-fade-up { animation: fade-up 0.75s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.animate-fade-in { animation: fade-in 1s ease both; }
+.animate-float { animation: float-y 7s ease-in-out infinite; }
+
+/* Scroll reveal — toggled by IntersectionObserver */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
 }
 
 /* Material Symbols icon baseline */

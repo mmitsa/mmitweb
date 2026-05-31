@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Icon } from "@/components/icon";
@@ -11,12 +11,27 @@ import { navItems, site } from "@/lib/site";
 export function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 w-full bg-surface/95 shadow-sm backdrop-blur">
+    <header
+      className={cn(
+        "sticky top-0 z-50 w-full backdrop-blur transition-all duration-300",
+        scrolled
+          ? "bg-surface/90 shadow-[0_4px_24px_rgba(3,6,17,0.08)]"
+          : "bg-surface/70"
+      )}
+    >
       <nav className="mx-auto flex h-20 w-full max-w-[1280px] items-center justify-between px-5 md:px-16">
         {/* Brand */}
         <Link

@@ -7,19 +7,19 @@ export function ServiceCard({ service }: { service: Service }) {
   return (
     <div
       className={cn(
-        "flex h-full flex-col rounded-xl border-t-4 bg-surface-container-lowest p-6 soft-shadow transition-all duration-300 hover:-translate-y-1 hover:shadow-lg",
-        service.accent === "secondary" ? "border-secondary" : "border-primary"
+        "card-hover group flex h-full flex-col rounded-xl border border-outline-variant/15 border-t-4 bg-surface-container-lowest p-6 soft-shadow",
+        service.accent === "secondary" ? "border-t-secondary" : "border-t-primary"
       )}
     >
       <div
         className={cn(
-          "mb-4 flex h-12 w-12 items-center justify-center rounded-full",
+          "mb-5 flex h-14 w-14 items-center justify-center rounded-xl transition-transform group-hover:scale-110",
           service.accent === "secondary"
             ? "bg-secondary-fixed text-secondary"
             : "bg-primary-fixed text-primary"
         )}
       >
-        <Icon name={service.icon} />
+        <Icon name={service.icon} className="text-[28px]" />
       </div>
       <h3 className="mb-2 text-xl font-head font-semibold text-primary">
         {service.title}
@@ -33,8 +33,8 @@ export function ServiceCard({ service }: { service: Service }) {
 
 export function ProductCard({ product }: { product: Product }) {
   return (
-    <div className="flex flex-col items-center rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-6 text-center soft-shadow transition-transform hover:-translate-y-1">
-      <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-secondary-fixed text-secondary">
+    <div className="card-hover group flex flex-col items-center rounded-xl border border-outline-variant/15 bg-surface-container-lowest p-6 text-center soft-shadow">
+      <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-secondary-fixed to-tertiary-fixed text-secondary transition-transform group-hover:scale-110">
         <Icon name={product.icon} className="text-4xl" />
       </div>
       <h3 className="mb-2 text-xl font-head font-semibold text-primary">
@@ -45,10 +45,10 @@ export function ProductCard({ product }: { product: Product }) {
       </p>
       <Link
         href={`/products/${product.slug}`}
-        className="inline-flex w-full items-center justify-center gap-1 rounded border border-secondary py-2 font-head text-sm text-secondary transition-colors hover:bg-secondary hover:text-on-secondary"
+        className="inline-flex w-full items-center justify-center gap-1 rounded border border-secondary py-2.5 font-head text-sm text-secondary transition-colors hover:bg-secondary hover:text-on-secondary"
       >
         التفاصيل
-        <Icon name="arrow_back" className="text-[18px]" />
+        <Icon name="arrow_back" className="cta-arrow text-[18px]" />
       </Link>
     </div>
   );
@@ -56,9 +56,9 @@ export function ProductCard({ product }: { product: Product }) {
 
 export function AdvantageCard({ advantage }: { advantage: Advantage }) {
   return (
-    <div className="flex flex-col items-center rounded-lg border border-outline-variant/10 bg-surface-container-lowest p-6 text-center shadow-sm transition-shadow hover:shadow-md">
-      <div className="mb-3 rounded-full bg-secondary/10 p-3">
-        <Icon name={advantage.icon} filled className="text-[32px] text-secondary" />
+    <div className="card-hover group flex flex-col items-center rounded-xl border border-outline-variant/15 bg-surface-container-lowest p-6 text-center soft-shadow">
+      <div className="mb-4 rounded-2xl bg-secondary/10 p-4 transition-colors group-hover:bg-secondary/15">
+        <Icon name={advantage.icon} filled className="text-[34px] text-secondary" />
       </div>
       <h3 className="mb-2 text-xl font-head font-semibold text-primary">
         {advantage.title}

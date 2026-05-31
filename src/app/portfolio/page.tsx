@@ -16,6 +16,7 @@ export default function PortfolioPage() {
     <>
       <PageHero
         title="أعمالنا ومشاريعنا"
+        eyebrow="إنجازاتنا"
         subtitle="نفخر بثقة عملائنا من الجهات الحكومية والمؤسسات في المملكة. تصفّح سابقة أعمالنا حسب التصنيف أو الحالة."
       />
 

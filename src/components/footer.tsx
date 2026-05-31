@@ -5,8 +5,10 @@ import { navItems, site } from "@/lib/site";
 
 export function Footer() {
   return (
-    <footer className="w-full border-t-4 border-tertiary-fixed-dim bg-primary text-on-primary">
-      <div className="mx-auto grid w-full max-w-[1280px] grid-cols-1 gap-12 px-5 py-12 md:grid-cols-3 md:px-16">
+    <footer className="relative w-full overflow-hidden bg-primary text-on-primary">
+      <div className="h-1.5 w-full bg-gradient-to-l from-secondary via-tertiary-fixed-dim to-secondary" />
+      <div className="bg-grid-light pointer-events-none absolute inset-0 opacity-50" />
+      <div className="relative z-10 mx-auto grid w-full max-w-[1280px] grid-cols-1 gap-12 px-5 py-14 md:grid-cols-3 md:px-16">
         {/* Brand */}
         <div className="space-y-4">
           <div className="flex items-center gap-2 text-2xl font-head font-bold text-on-primary">
@@ -60,7 +62,7 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="mx-auto flex w-full max-w-[1280px] flex-col items-center justify-between gap-2 border-t border-on-primary-fixed-variant px-5 py-4 text-center md:flex-row md:px-16">
+      <div className="relative z-10 mx-auto flex w-full max-w-[1280px] flex-col items-center justify-between gap-2 border-t border-on-primary-fixed-variant px-5 py-4 text-center md:flex-row md:px-16">
         <p className="text-sm text-surface-variant opacity-60">
           جميع الحقوق محفوظة لشركة {site.name} © 2024
         </p>
