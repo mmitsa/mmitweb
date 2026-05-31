@@ -23,12 +23,12 @@ export function Navbar() {
           href="/"
           className="flex items-center gap-2 text-2xl font-head font-bold text-primary transition-opacity hover:opacity-80"
         >
-          <Logo className="h-9 w-9" />
+          <Logo className="h-8 w-auto" />
           <span>{site.name}</span>
         </Link>
 
         {/* Desktop links */}
-        <ul className="hidden items-center gap-8 md:flex">
+        <ul className="hidden items-center gap-5 lg:flex">
           {navItems.map((item) => (
             <li key={item.href}>
               <Link
@@ -49,7 +49,7 @@ export function Navbar() {
         {/* Trailing CTA */}
         <Link
           href="/contact"
-          className="hidden rounded bg-secondary px-6 py-2 font-head text-sm text-on-secondary shadow-sm transition-colors hover:bg-secondary-container md:inline-flex"
+          className="hidden rounded bg-secondary px-6 py-2 font-head text-sm text-on-secondary shadow-sm transition-colors hover:bg-secondary-container lg:inline-flex"
         >
           اطلب عرض سعر
         </Link>
@@ -60,7 +60,7 @@ export function Navbar() {
           aria-label="القائمة"
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="p-2 text-primary md:hidden"
+          className="p-2 text-primary lg:hidden"
         >
           <Icon name={open ? "close" : "menu"} className="text-[28px]" />
         </button>
@@ -68,7 +68,7 @@ export function Navbar() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="border-t border-outline-variant/30 bg-surface md:hidden">
+        <div className="border-t border-outline-variant/30 bg-surface lg:hidden">
           <ul className="mx-auto flex max-w-[1280px] flex-col px-5 py-3">
             {navItems.map((item) => (
               <li key={item.href}>

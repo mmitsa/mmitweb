@@ -10,7 +10,7 @@ export function Footer() {
         {/* Brand */}
         <div className="space-y-4">
           <div className="flex items-center gap-2 text-2xl font-head font-bold text-on-primary">
-            <Logo className="h-9 w-9" />
+            <Logo className="h-8 w-auto" />
             <span>{site.name}</span>
           </div>
           <p className="max-w-xs leading-relaxed text-on-primary-fixed-variant">

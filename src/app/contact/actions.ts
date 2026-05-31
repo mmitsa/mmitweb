@@ -2,22 +2,44 @@
 
 import { headers } from "next/headers";
 import { Resend } from "resend";
+import { Ratelimit } from "@upstash/ratelimit";
+import { Redis } from "@upstash/redis";
 import { z } from "zod";
 import { site } from "@/lib/site";
 
-// Basic in-memory rate limiter (per server instance). For multi-instance
-// production, back this with a shared store (e.g. Upstash Redis).
 const RATE_LIMIT = 5;
 const WINDOW_MS = 10 * 60 * 1000;
+
+// Preferred: distributed rate limiting via Upstash Redis (works across
+// multiple serverless instances). Enabled automatically when the
+// UPSTASH_REDIS_REST_URL / _TOKEN env vars are present.
+const ratelimit =
+  process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN
+    ? new Ratelimit({
+        redis: Redis.fromEnv(),
+        limiter: Ratelimit.slidingWindow(RATE_LIMIT, "10 m"),
+        prefix: "ratelimit:contact",
+      })
+    : null;
+
+// Fallback: in-memory limiter (per instance) when Upstash is not configured.
 const hits = new Map<string, number[]>();
 
-function isRateLimited(ip: string): boolean {
+function isRateLimitedInMemory(ip: string): boolean {
   const now = Date.now();
   const recent = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
   hits.set(ip, recent);
   if (recent.length >= RATE_LIMIT) return true;
   recent.push(now);
   return false;
+}
+
+async function isRateLimited(ip: string): Promise<boolean> {
+  if (ratelimit) {
+    const { success } = await ratelimit.limit(ip);
+    return !success;
+  }
+  return isRateLimitedInMemory(ip);
 }
 
 const schema = z.object({
@@ -49,7 +71,7 @@ export async function submitContact(
     (hdrs.get("x-forwarded-for") ?? "").split(",")[0].trim() ||
     hdrs.get("x-real-ip") ||
     "unknown";
-  if (isRateLimited(ip)) {
+  if (await isRateLimited(ip)) {
     return {
       status: "error",
       message: "لقد أرسلت عدة رسائل خلال فترة قصيرة. الرجاء المحاولة بعد قليل.",

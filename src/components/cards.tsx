@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Icon } from "@/components/icon";
 import { cn } from "@/lib/utils";
 import type { Advantage, Product, Service } from "@/lib/site";
@@ -42,20 +43,13 @@ export function ProductCard({ product }: { product: Product }) {
       <p className="mb-6 flex-grow text-sm text-on-surface-variant">
         {product.description}
       </p>
-      {product.href ? (
-        <a
-          href={product.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="w-full rounded border border-secondary py-2 font-head text-sm text-secondary transition-colors hover:bg-secondary hover:text-on-secondary"
-        >
-          استكشف
-        </a>
-      ) : (
-        <span className="w-full rounded border border-outline-variant py-2 text-center font-head text-sm text-on-surface-variant">
-          قريبًا
-        </span>
-      )}
+      <Link
+        href={`/products/${product.slug}`}
+        className="inline-flex w-full items-center justify-center gap-1 rounded border border-secondary py-2 font-head text-sm text-secondary transition-colors hover:bg-secondary hover:text-on-secondary"
+      >
+        التفاصيل
+        <Icon name="arrow_back" className="text-[18px]" />
+      </Link>
     </div>
   );
 }
