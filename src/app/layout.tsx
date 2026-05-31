@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { WhatsAppFab } from "@/components/whatsapp-fab";
+import { Analytics } from "@/components/analytics";
 import { OrganizationJsonLd } from "@/components/json-ld";
 import { site } from "@/lib/site";
 
@@ -91,6 +92,7 @@ export default function RootLayout({
         <main id="main-content" className="flex-grow">{children}</main>
         <Footer />
         <WhatsAppFab />
+        <Analytics />
       </body>
     </html>
   );

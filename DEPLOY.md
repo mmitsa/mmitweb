@@ -140,7 +140,9 @@ pm2 restart mmitweb       # أو: sudo systemctl restart mmitweb
 ## ملاحظات
 
 - **ترويسات الأمان** (HSTS, nosniff, ...) مضبوطة في [`next.config.ts`](next.config.ts).
-- **التحليلات**: أُزيلت Vercel Analytics. للتحليلات على سيرفرك استخدم حلًّا
-  ذاتي الاستضافة مثل **Plausible** أو **Umami** (أخبرني لأركّبه).
+- **التحليلات**: مدمجة وجاهزة (ذاتية الاستضافة، تحترم الخصوصية) — تُفعَّل
+  بضبط متغيّرات البيئة فقط، ولا تعمل قبل ذلك:
+  - **Umami**: `NEXT_PUBLIC_UMAMI_SRC` + `NEXT_PUBLIC_UMAMI_WEBSITE_ID`
+  - **Plausible**: `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` (+ اختياريًا `NEXT_PUBLIC_PLAUSIBLE_SRC`)
 - بعد ربط النطاق تأكّد أن `site.url` في [`src/lib/site.ts`](src/lib/site.ts) صحيح.
 - أرسل `/sitemap.xml` إلى Google Search Console.
