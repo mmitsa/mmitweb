@@ -3,6 +3,7 @@
 import { useActionState, useState } from "react";
 import Link from "next/link";
 import { Icon } from "@/components/icon";
+import { ImageField } from "@/components/admin/image-field";
 import type { CrudState, CrudAction } from "@/components/admin/crud-form";
 import {
   BLOCK_DEFS,
@@ -137,6 +138,12 @@ export function PageEditor({
                           value={Array.isArray(value) ? (value as string[]).join("\n") : ""}
                           onChange={(e) => patch(i, f.name, e.target.value.split("\n").map((s) => s.trim()).filter(Boolean))}
                           className={`${input} resize-y`}
+                        />
+                      )}
+                      {f.kind === "image" && (
+                        <ImageField
+                          value={typeof value === "string" ? value : ""}
+                          onValueChange={(url) => patch(i, f.name, url)}
                         />
                       )}
                     </div>

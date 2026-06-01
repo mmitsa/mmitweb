@@ -3,30 +3,9 @@ import { Icon } from "@/components/icon";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section";
 
-const steps = [
-  {
-    icon: "travel_explore",
-    title: "الاستكشاف والتحليل",
-    desc: "نفهم احتياجاتك ونحلّل وضعك التقني الحالي لتحديد الفرص والأولويات.",
-  },
-  {
-    icon: "architecture",
-    title: "تصميم الحل",
-    desc: "نصمّم حلًا مخصّصًا يحقق أهدافك باستخدام أنسب التقنيات وأفضل الممارسات.",
-  },
-  {
-    icon: "deployed_code",
-    title: "التنفيذ والتكامل",
-    desc: "ننفّذ الحل وندمجه مع أنظمتك القائمة بسلاسة وأمان وأقل تأثير على العمل.",
-  },
-  {
-    icon: "support_agent",
-    title: "الدعم والتطوير",
-    desc: "ندعمك ونطوّر الحل باستمرار لضمان أعلى أداء واستمرارية دون انقطاع.",
-  },
-];
+type Step = { id?: string; icon: string; title: string; description: string };
 
-export function Process() {
+export function Process({ steps }: { steps: Step[] }) {
   return (
     <section className="bg-surface-container-lowest py-20">
       <Container>
@@ -58,7 +37,7 @@ export function Process() {
                     {step.title}
                   </h3>
                   <p className="text-sm leading-relaxed text-on-surface-variant">
-                    {step.desc}
+                    {step.description}
                   </p>
                 </div>
               </Reveal>

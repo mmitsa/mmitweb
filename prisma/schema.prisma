@@ -86,6 +86,30 @@ model Faq {
   order    Int    @default(0)
 }
 
+model Advantage {
+  id          String @id @default(cuid())
+  icon        String
+  title       String
+  description String
+  order       Int    @default(0)
+}
+
+model Sector {
+  id          String @id @default(cuid())
+  icon        String
+  title       String
+  description String
+  order       Int    @default(0)
+}
+
+model ProcessStep {
+  id          String @id @default(cuid())
+  icon        String
+  title       String
+  description String
+  order       Int    @default(0)
+}
+
 /// Free-form pages built from content blocks (page builder).
 model Page {
   id          String   @id @default(cuid())

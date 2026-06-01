@@ -3,11 +3,12 @@ export type Block =
   | { type: "heading"; text: string }
   | { type: "paragraph"; text: string }
   | { type: "list"; title?: string; items: string[] }
+  | { type: "image"; src: string; alt?: string }
   | { type: "cta"; title: string; text?: string; buttonLabel: string; buttonHref: string };
 
 export type BlockType = Block["type"];
 
-type FieldKind = "text" | "textarea" | "lines";
+type FieldKind = "text" | "textarea" | "lines" | "image";
 type FieldDef = { name: string; label: string; kind: FieldKind };
 
 export const BLOCK_DEFS: Record<BlockType, { label: string; icon: string; fields: FieldDef[] }> = {
@@ -38,6 +39,14 @@ export const BLOCK_DEFS: Record<BlockType, { label: string; icon: string; fields
       { name: "items", label: "العناصر (سطر لكل عنصر)", kind: "lines" },
     ],
   },
+  image: {
+    label: "صورة",
+    icon: "image",
+    fields: [
+      { name: "src", label: "الصورة", kind: "image" },
+      { name: "alt", label: "وصف بديل (اختياري)", kind: "text" },
+    ],
+  },
   cta: {
     label: "دعوة لإجراء",
     icon: "ads_click",
@@ -50,7 +59,7 @@ export const BLOCK_DEFS: Record<BlockType, { label: string; icon: string; fields
   },
 };
 
-export const BLOCK_ORDER: BlockType[] = ["hero", "heading", "paragraph", "list", "cta"];
+export const BLOCK_ORDER: BlockType[] = ["hero", "heading", "paragraph", "list", "image", "cta"];
 
 export function emptyBlock(type: BlockType): Block {
   switch (type) {
@@ -58,6 +67,7 @@ export function emptyBlock(type: BlockType): Block {
     case "heading": return { type, text: "" };
     case "paragraph": return { type, text: "" };
     case "list": return { type, title: "", items: [] };
+    case "image": return { type, src: "", alt: "" };
     case "cta": return { type, title: "", text: "", buttonLabel: "", buttonHref: "" };
   }
 }
@@ -79,6 +89,8 @@ export function parseBlocks(value: unknown): Block[] {
       out.push({ type, eyebrow: str("eyebrow"), title: str("title"), subtitle: str("subtitle") });
     } else if (type === "cta") {
       out.push({ type, title: str("title"), text: str("text"), buttonLabel: str("buttonLabel"), buttonHref: str("buttonHref") });
+    } else if (type === "image") {
+      out.push({ type, src: str("src"), alt: str("alt") });
     } else {
       out.push({ type, text: str("text") } as Block);
     }

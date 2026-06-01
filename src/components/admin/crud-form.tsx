@@ -3,6 +3,7 @@
 import { useActionState } from "react";
 import Link from "next/link";
 import { Icon } from "@/components/icon";
+import { ImageField } from "@/components/admin/image-field";
 
 export type CrudState = {
   error?: string;
@@ -12,7 +13,7 @@ export type CrudState = {
 export type FieldDef = {
   name: string;
   label: string;
-  kind?: "text" | "textarea" | "select" | "lines" | "checkbox";
+  kind?: "text" | "textarea" | "select" | "lines" | "checkbox" | "image";
   type?: string;
   dir?: "ltr" | "rtl";
   options?: { value: string; label: string }[];
@@ -87,6 +88,10 @@ export function CrudForm({
                     <option key={o.value} value={o.value}>{o.label}</option>
                   ))}
                 </select>
+              )}
+
+              {kind === "image" && (
+                <ImageField name={f.name} defaultValue={raw == null ? "" : String(raw)} />
               )}
 
               {kind === "checkbox" && (

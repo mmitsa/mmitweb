@@ -6,7 +6,24 @@ import {
   products,
   projects,
   partners,
+  advantages,
 } from "../src/lib/site";
+
+const sectors = [
+  { icon: "account_balance", title: "القطاع الحكومي", description: "وزارات وجهات حكومية ومراكز متخصصة." },
+  { icon: "location_city", title: "القطاع البلدي", description: "أمانات وبلديات في مختلف المناطق." },
+  { icon: "health_and_safety", title: "القطاع الصحي", description: "مستشفيات ومرافق ومختبرات صحية." },
+  { icon: "bolt", title: "قطاع الطاقة", description: "جهات ومراكز كفاءة الطاقة." },
+  { icon: "local_police", title: "القطاع الأمني", description: "جهات أمنية ومرافقها الحيوية." },
+  { icon: "business_center", title: "القطاع الخاص", description: "مؤسسات وشركات تتطلّع للتحول الرقمي." },
+];
+
+const processSteps = [
+  { icon: "travel_explore", title: "الاستكشاف والتحليل", description: "نفهم احتياجاتك ونحلّل وضعك التقني الحالي لتحديد الفرص والأولويات." },
+  { icon: "architecture", title: "تصميم الحل", description: "نصمّم حلًا مخصّصًا يحقق أهدافك باستخدام أنسب التقنيات وأفضل الممارسات." },
+  { icon: "deployed_code", title: "التنفيذ والتكامل", description: "ننفّذ الحل وندمجه مع أنظمتك القائمة بسلاسة وأمان وأقل تأثير على العمل." },
+  { icon: "support_agent", title: "الدعم والتطوير", description: "ندعمك ونطوّر الحل باستمرار لضمان أعلى أداء واستمرارية دون انقطاع." },
+];
 
 const prisma = new PrismaClient();
 
@@ -103,6 +120,24 @@ async function main() {
   await prisma.faq.deleteMany();
   await prisma.faq.createMany({
     data: faqs.map((f, i) => ({ question: f.question, answer: f.answer, order: i })),
+  });
+
+  // Advantages
+  await prisma.advantage.deleteMany();
+  await prisma.advantage.createMany({
+    data: advantages.map((a, i) => ({ icon: a.icon, title: a.title, description: a.description, order: i })),
+  });
+
+  // Sectors
+  await prisma.sector.deleteMany();
+  await prisma.sector.createMany({
+    data: sectors.map((s, i) => ({ ...s, order: i })),
+  });
+
+  // Process steps
+  await prisma.processStep.deleteMany();
+  await prisma.processStep.createMany({
+    data: processSteps.map((s, i) => ({ ...s, order: i })),
   });
 
   // Admin user

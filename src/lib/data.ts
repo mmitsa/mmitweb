@@ -20,6 +20,13 @@ export const getPartners = () =>
 
 export const getFaqs = () => prisma.faq.findMany({ orderBy: { order: "asc" } });
 
+export const getAdvantages = () =>
+  prisma.advantage.findMany({ orderBy: { order: "asc" } });
+export const getSectors = () =>
+  prisma.sector.findMany({ orderBy: { order: "asc" } });
+export const getProcessSteps = () =>
+  prisma.processStep.findMany({ orderBy: { order: "asc" } });
+
 export const getPages = () =>
   prisma.page.findMany({ orderBy: { updatedAt: "desc" } });
 export const getPublishedPage = (slug: string) =>

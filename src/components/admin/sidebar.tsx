@@ -15,6 +15,9 @@ const items = [
   { href: "/admin/projects", label: "الأعمال", icon: "work" },
   { href: "/admin/partners", label: "الشركاء", icon: "handshake" },
   { href: "/admin/faqs", label: "الأسئلة الشائعة", icon: "quiz" },
+  { href: "/admin/advantages", label: "المزايا", icon: "workspace_premium" },
+  { href: "/admin/sectors", label: "القطاعات", icon: "domain" },
+  { href: "/admin/process", label: "مراحل العمل", icon: "timeline" },
   { href: "/admin/pages", label: "الصفحات", icon: "article" },
   { href: "/admin/users", label: "المستخدمون", icon: "group" },
 ];

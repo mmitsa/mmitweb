@@ -3,16 +3,9 @@ import { Icon } from "@/components/icon";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section";
 
-const sectors = [
-  { icon: "account_balance", title: "القطاع الحكومي", desc: "وزارات وجهات حكومية ومراكز متخصصة." },
-  { icon: "location_city", title: "القطاع البلدي", desc: "أمانات وبلديات في مختلف المناطق." },
-  { icon: "health_and_safety", title: "القطاع الصحي", desc: "مستشفيات ومرافق ومختبرات صحية." },
-  { icon: "bolt", title: "قطاع الطاقة", desc: "جهات ومراكز كفاءة الطاقة." },
-  { icon: "local_police", title: "القطاع الأمني", desc: "جهات أمنية ومرافقها الحيوية." },
-  { icon: "business_center", title: "القطاع الخاص", desc: "مؤسسات وشركات تتطلّع للتحول الرقمي." },
-];
+type Sector = { id?: string; icon: string; title: string; description: string };
 
-export function Sectors() {
+export function Sectors({ sectors }: { sectors: Sector[] }) {
   return (
     <section className="bg-surface-container-low py-20">
       <Container>
@@ -33,7 +26,7 @@ export function Sectors() {
                 </div>
                 <div>
                   <h3 className="font-head text-lg font-semibold text-primary">{s.title}</h3>
-                  <p className="mt-1 text-sm leading-relaxed text-on-surface-variant">{s.desc}</p>
+                  <p className="mt-1 text-sm leading-relaxed text-on-surface-variant">{s.description}</p>
                 </div>
               </div>
             </Reveal>

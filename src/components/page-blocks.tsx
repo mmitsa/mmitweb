@@ -51,6 +51,20 @@ export function PageBlocks({ blocks }: { blocks: Block[] }) {
               </section>
             );
 
+          case "image":
+            return block.src ? (
+              <section key={i} className="py-6">
+                <Container>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={block.src}
+                    alt={block.alt || ""}
+                    className="mx-auto max-h-[560px] w-full rounded-2xl border border-outline-variant/20 object-cover soft-shadow"
+                  />
+                </Container>
+              </section>
+            ) : null;
+
           case "cta":
             return (
               <section key={i} className="my-10">

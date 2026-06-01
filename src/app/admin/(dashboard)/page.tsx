@@ -5,13 +5,16 @@ import { prisma } from "@/lib/prisma";
 export const dynamic = "force-dynamic";
 
 export default async function AdminDashboard() {
-  const [services, products, projects, partners, faqs, pages, users] =
+  const [services, products, projects, partners, faqs, advantages, sectors, processSteps, pages, users] =
     await Promise.all([
       prisma.service.count(),
       prisma.product.count(),
       prisma.project.count(),
       prisma.partner.count(),
       prisma.faq.count(),
+      prisma.advantage.count(),
+      prisma.sector.count(),
+      prisma.processStep.count(),
       prisma.page.count(),
       prisma.user.count(),
     ]);
@@ -22,6 +25,9 @@ export default async function AdminDashboard() {
     { label: "الأعمال", count: projects, href: "/admin/projects", icon: "work" },
     { label: "الشركاء", count: partners, href: "/admin/partners", icon: "handshake" },
     { label: "الأسئلة الشائعة", count: faqs, href: "/admin/faqs", icon: "quiz" },
+    { label: "المزايا", count: advantages, href: "/admin/advantages", icon: "workspace_premium" },
+    { label: "القطاعات", count: sectors, href: "/admin/sectors", icon: "domain" },
+    { label: "مراحل العمل", count: processSteps, href: "/admin/process", icon: "timeline" },
     { label: "الصفحات", count: pages, href: "/admin/pages", icon: "article" },
     { label: "المستخدمون", count: users, href: "/admin/users", icon: "group" },
   ];

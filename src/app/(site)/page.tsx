@@ -9,17 +9,27 @@ import { ServiceCard, ProductCard, AdvantageCard } from "@/components/cards";
 import { Stats, ClientsStrip } from "@/components/stats";
 import { Process } from "@/components/process";
 import { Sectors } from "@/components/sectors";
-import { advantages } from "@/lib/site";
-import { getServices, getProducts, getProjects } from "@/lib/data";
+import {
+  getServices,
+  getProducts,
+  getProjects,
+  getAdvantages,
+  getSectors,
+  getProcessSteps,
+} from "@/lib/data";
 
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const [services, products, projects] = await Promise.all([
-    getServices(),
-    getProducts(),
-    getProjects(),
-  ]);
+  const [services, products, projects, advantages, sectors, processSteps] =
+    await Promise.all([
+      getServices(),
+      getProducts(),
+      getProjects(),
+      getAdvantages(),
+      getSectors(),
+      getProcessSteps(),
+    ]);
   const clients = Array.from(new Set(projects.map((p) => p.client)));
 
   return (
@@ -109,7 +119,7 @@ export default async function HomePage() {
           </Reveal>
           <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
             {advantages.map((a, i) => (
-              <Reveal key={a.title} delay={i * 90}>
+              <Reveal key={a.id} delay={i * 90}>
                 <AdvantageCard advantage={a} />
               </Reveal>
             ))}
@@ -170,10 +180,10 @@ export default async function HomePage() {
       </section>
 
       {/* ── Process ──────────────────────────────────────── */}
-      <Process />
+      <Process steps={processSteps} />
 
       {/* ── Sectors ──────────────────────────────────────── */}
-      <Sectors />
+      <Sectors sectors={sectors} />
 
       {/* ── Clients ──────────────────────────────────────── */}
       <ClientsStrip clients={clients} />
