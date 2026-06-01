@@ -14,6 +14,8 @@ const schema = z.object({
   phoneDisplay: z.string().trim().min(1, "مطلوب"),
   whatsapp: z.string().trim().min(1, "مطلوب"),
   address: z.string().trim().min(1, "مطلوب"),
+  inquiryEmail: z.string().trim().email("بريد غير صحيح").or(z.literal("")).optional(),
+  emailFrom: z.string().trim().optional(),
 });
 
 export type SettingsState = {
@@ -38,7 +40,19 @@ export async function updateSettings(
     return { error: "يرجى تصحيح الحقول المميّزة.", fieldErrors };
   }
 
-  await prisma.settings.update({ where: { id: 1 }, data: parsed.data });
+  const { inquiryEmail, emailFrom, ...rest } = parsed.data;
+  // Only overwrite the API key when a new value is provided.
+  const key = String(formData.get("resendApiKey") ?? "").trim();
+
+  await prisma.settings.update({
+    where: { id: 1 },
+    data: {
+      ...rest,
+      inquiryEmail: inquiryEmail || null,
+      emailFrom: emailFrom || null,
+      ...(key ? { resendApiKey: key } : {}),
+    },
+  });
   revalidatePath("/");
   revalidatePath("/admin/settings");
   return { ok: true };

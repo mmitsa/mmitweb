@@ -5,6 +5,8 @@ import { Resend } from "resend";
 import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
 import { z } from "zod";
+import { prisma } from "@/lib/prisma";
+import { getSettings } from "@/lib/data";
 import { site } from "@/lib/site";
 
 const RATE_LIMIT = 5;
@@ -96,58 +98,48 @@ export async function submitContact(
   }
 
   const { name, email, mobile, service, message } = parsed.data;
-  const apiKey = process.env.RESEND_API_KEY;
 
-  // Graceful fallback when no email provider is configured yet (e.g. local dev).
-  if (!apiKey) {
-    console.warn("[contact] RESEND_API_KEY not set — message logged but not emailed:", {
-      name,
-      email,
-      mobile,
-      service,
-      message,
-    });
-    return {
-      status: "success",
-      message: "تم استلام رسالتك. (لم يُضبط مزوّد البريد بعد — راجع README)",
-    };
-  }
-
+  // 1) Always persist the inquiry so nothing is ever lost.
   try {
-    const resend = new Resend(apiKey);
-    const to = process.env.CONTACT_TO_EMAIL ?? site.email;
-    const from = process.env.CONTACT_FROM_EMAIL ?? "onboarding@resend.dev";
-
-    const { error } = await resend.emails.send({
-      from: `${site.name} <${from}>`,
-      to,
-      replyTo: email,
-      subject: `رسالة جديدة من الموقع — ${name}`,
-      text: [
-        `الاسم: ${name}`,
-        `البريد: ${email}`,
-        `الجوال: ${mobile || "—"}`,
-        `الخدمة: ${service || "—"}`,
-        "",
-        "الرسالة:",
-        message,
-      ].join("\n"),
+    await prisma.inquiry.create({
+      data: { name, email, mobile: mobile || null, service: service || null, message },
     });
-
-    if (error) {
-      console.error("[contact] Resend error:", error);
-      return {
-        status: "error",
-        message: "تعذّر إرسال الرسالة حاليًا. الرجاء المحاولة لاحقًا أو التواصل عبر واتساب.",
-      };
-    }
-
-    return { status: "success", message: "تم استلام رسالتك بنجاح." };
   } catch (err) {
-    console.error("[contact] unexpected error:", err);
-    return {
-      status: "error",
-      message: "حدث خطأ غير متوقع. الرجاء المحاولة لاحقًا.",
-    };
+    console.error("[contact] failed to store inquiry:", err);
+    return { status: "error", message: "تعذّر استلام رسالتك حاليًا. الرجاء المحاولة لاحقًا." };
   }
+
+  // 2) Optionally email a copy, using the settings configured in the admin
+  //    (falling back to env vars). Email failure does not lose the inquiry.
+  const settings = await getSettings();
+  const apiKey = settings?.resendApiKey || process.env.RESEND_API_KEY;
+  if (apiKey) {
+    try {
+      const resend = new Resend(apiKey);
+      const to = settings?.inquiryEmail || settings?.email || process.env.CONTACT_TO_EMAIL || site.email;
+      const from = settings?.emailFrom || process.env.CONTACT_FROM_EMAIL || "onboarding@resend.dev";
+      const brand = settings?.name || site.name;
+
+      const { error } = await resend.emails.send({
+        from: `${brand} <${from}>`,
+        to,
+        replyTo: email,
+        subject: `استفسار جديد من الموقع — ${name}`,
+        text: [
+          `الاسم: ${name}`,
+          `البريد: ${email}`,
+          `الجوال: ${mobile || "—"}`,
+          `الخدمة: ${service || "—"}`,
+          "",
+          "الرسالة:",
+          message,
+        ].join("\n"),
+      });
+      if (error) console.error("[contact] Resend error:", error);
+    } catch (err) {
+      console.error("[contact] email send failed:", err);
+    }
+  }
+
+  return { status: "success", message: "تم استلام رسالتك بنجاح، وسنعاود التواصل معك قريبًا." };
 }

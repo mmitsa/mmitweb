@@ -5,8 +5,10 @@ import { prisma } from "@/lib/prisma";
 export const dynamic = "force-dynamic";
 
 export default async function AdminDashboard() {
-  const [services, products, projects, partners, faqs, advantages, sectors, processSteps, pages, users] =
+  const [inquiries, unread, services, products, projects, partners, faqs, advantages, sectors, processSteps, pages, users] =
     await Promise.all([
+      prisma.inquiry.count(),
+      prisma.inquiry.count({ where: { read: false } }),
       prisma.service.count(),
       prisma.product.count(),
       prisma.project.count(),
@@ -20,6 +22,7 @@ export default async function AdminDashboard() {
     ]);
 
   const cards = [
+    { label: unread > 0 ? `الاستفسارات (${unread} جديدة)` : "الاستفسارات", count: inquiries, href: "/admin/inquiries", icon: "inbox" },
     { label: "الخدمات", count: services, href: "/admin/services", icon: "design_services" },
     { label: "المنتجات", count: products, href: "/admin/products", icon: "apps" },
     { label: "الأعمال", count: projects, href: "/admin/projects", icon: "work" },

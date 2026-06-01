@@ -31,3 +31,8 @@ export const getPages = () =>
   prisma.page.findMany({ orderBy: { updatedAt: "desc" } });
 export const getPublishedPage = (slug: string) =>
   prisma.page.findFirst({ where: { slug, published: true } });
+
+export const getInquiries = () =>
+  prisma.inquiry.findMany({ orderBy: { createdAt: "desc" } });
+export const getUnreadInquiryCount = () =>
+  prisma.inquiry.count({ where: { read: false } });

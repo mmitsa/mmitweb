@@ -9,6 +9,7 @@ import { signOutAction } from "@/app/admin/actions";
 
 const items = [
   { href: "/admin", label: "لوحة المعلومات", icon: "dashboard" },
+  { href: "/admin/inquiries", label: "الاستفسارات", icon: "inbox" },
   { href: "/admin/settings", label: "الإعدادات", icon: "settings" },
   { href: "/admin/services", label: "الخدمات", icon: "design_services" },
   { href: "/admin/products", label: "المنتجات", icon: "apps" },
@@ -24,8 +25,10 @@ const items = [
 
 export function AdminSidebar({
   user,
+  unread = 0,
 }: {
   user?: { name?: string | null; email?: string | null; role?: string };
+  unread?: number;
 }) {
   const pathname = usePathname();
   const isActive = (href: string) =>
@@ -54,7 +57,12 @@ export function AdminSidebar({
             )}
           >
             <Icon name={it.icon} className="text-[20px]" />
-            {it.label}
+            <span className="flex-1">{it.label}</span>
+            {it.href === "/admin/inquiries" && unread > 0 && (
+              <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-error px-1.5 text-xs font-bold text-on-error">
+                {unread}
+              </span>
+            )}
           </Link>
         ))}
       </nav>

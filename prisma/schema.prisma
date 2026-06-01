@@ -28,7 +28,23 @@ model Settings {
   phoneDisplay String
   whatsapp     String
   address      String
+  // Email / inquiry delivery (managed from the admin)
+  inquiryEmail String?
+  emailFrom    String?
+  resendApiKey String?
   updatedAt    DateTime @updatedAt
+}
+
+/// Contact-form submissions (received inquiries).
+model Inquiry {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  mobile    String?
+  service   String?
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
 }
 
 model Service {

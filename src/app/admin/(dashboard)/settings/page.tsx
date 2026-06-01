@@ -30,6 +30,9 @@ export default async function SettingsPage() {
             phoneDisplay: s.phoneDisplay,
             whatsapp: s.whatsapp,
             address: s.address,
+            inquiryEmail: s.inquiryEmail ?? "",
+            emailFrom: s.emailFrom ?? "",
+            hasApiKey: Boolean(s.resendApiKey),
           }}
         />
       </div>
