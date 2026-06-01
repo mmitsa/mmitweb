@@ -19,10 +19,17 @@ const items = [
   { href: "/admin/users", label: "المستخدمون", icon: "group" },
 ];
 
-export function AdminSidebar({ user }: { user?: { name?: string | null; email?: string | null } }) {
+export function AdminSidebar({
+  user,
+}: {
+  user?: { name?: string | null; email?: string | null; role?: string };
+}) {
   const pathname = usePathname();
   const isActive = (href: string) =>
     href === "/admin" ? pathname === "/admin" : pathname.startsWith(href);
+  const visible = items.filter(
+    (it) => it.href !== "/admin/users" || user?.role === "admin"
+  );
 
   return (
     <aside className="flex w-64 flex-shrink-0 flex-col border-l border-outline-variant/30 bg-surface-container-lowest">
@@ -32,7 +39,7 @@ export function AdminSidebar({ user }: { user?: { name?: string | null; email?: 
       </div>
 
       <nav className="flex-1 space-y-1 overflow-y-auto p-3">
-        {items.map((it) => (
+        {visible.map((it) => (
           <Link
             key={it.href}
             href={it.href}
