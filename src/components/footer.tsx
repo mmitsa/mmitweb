@@ -9,6 +9,7 @@ export type FooterSettings = {
   phone: string;
   phoneDisplay: string;
   address: string;
+  logoWhite?: string;
 };
 
 export function Footer({ settings }: { settings: FooterSettings }) {
@@ -20,7 +21,7 @@ export function Footer({ settings }: { settings: FooterSettings }) {
         {/* Brand */}
         <div className="space-y-4">
           <div className="flex items-center gap-2 text-2xl font-head font-bold text-on-primary">
-            <Logo tone="white" className="h-8 w-auto" />
+            <Logo tone="white" src={settings.logoWhite} className="h-8 w-auto" />
             <span>{settings.name}</span>
           </div>
           <p className="max-w-xs leading-relaxed text-on-primary-fixed-variant">

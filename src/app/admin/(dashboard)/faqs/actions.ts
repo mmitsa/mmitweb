@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/auth";
+import { logAudit } from "@/lib/audit";
 import { zodErrors } from "@/lib/form";
 import type { CrudState } from "@/components/admin/crud-form";
 
@@ -24,6 +25,7 @@ export async function createFaq(_prev: CrudState, fd: FormData): Promise<CrudSta
   const parsed = schema.safeParse(Object.fromEntries(fd));
   if (!parsed.success) return zodErrors(parsed.error);
   await prisma.faq.create({ data: parsed.data });
+  await logAudit("create", "سؤال");
   revalidate();
   redirect("/admin/faqs");
 }
@@ -33,6 +35,7 @@ export async function updateFaq(id: string, _prev: CrudState, fd: FormData): Pro
   const parsed = schema.safeParse(Object.fromEntries(fd));
   if (!parsed.success) return zodErrors(parsed.error);
   await prisma.faq.update({ where: { id }, data: parsed.data });
+  await logAudit("update", "سؤال");
   revalidate();
   redirect("/admin/faqs");
 }
@@ -40,5 +43,6 @@ export async function updateFaq(id: string, _prev: CrudState, fd: FormData): Pro
 export async function deleteFaq(id: string) {
   if (!(await auth())?.user) return;
   await prisma.faq.delete({ where: { id } });
+  await logAudit("delete", "سؤال");
   revalidate();
 }

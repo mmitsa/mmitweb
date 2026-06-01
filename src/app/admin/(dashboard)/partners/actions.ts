@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/auth";
+import { logAudit } from "@/lib/audit";
 import { zodErrors } from "@/lib/form";
 import type { CrudState } from "@/components/admin/crud-form";
 
@@ -31,6 +32,7 @@ export async function createPartner(_prev: CrudState, fd: FormData): Promise<Cru
   const parsed = schema.safeParse(Object.fromEntries(fd));
   if (!parsed.success) return zodErrors(parsed.error);
   await prisma.partner.create({ data: toData(parsed.data) });
+  await logAudit("create", "شريك");
   revalidate();
   redirect("/admin/partners");
 }
@@ -40,6 +42,7 @@ export async function updatePartner(id: string, _prev: CrudState, fd: FormData):
   const parsed = schema.safeParse(Object.fromEntries(fd));
   if (!parsed.success) return zodErrors(parsed.error);
   await prisma.partner.update({ where: { id }, data: toData(parsed.data) });
+  await logAudit("update", "شريك");
   revalidate();
   redirect("/admin/partners");
 }
@@ -47,5 +50,6 @@ export async function updatePartner(id: string, _prev: CrudState, fd: FormData):
 export async function deletePartner(id: string) {
   if (!(await auth())?.user) return;
   await prisma.partner.delete({ where: { id } });
+  await logAudit("delete", "شريك");
   revalidate();
 }

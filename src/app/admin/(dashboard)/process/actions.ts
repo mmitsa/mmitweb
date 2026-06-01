@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/auth";
 import { zodErrors } from "@/lib/form";
+import { logAudit } from "@/lib/audit";
 import type { CrudState } from "@/components/admin/crud-form";
 
 const schema = z.object({
@@ -25,6 +26,7 @@ export async function createProcessStep(_prev: CrudState, fd: FormData): Promise
   const parsed = schema.safeParse(Object.fromEntries(fd));
   if (!parsed.success) return zodErrors(parsed.error);
   await prisma.processStep.create({ data: parsed.data });
+  await logAudit("create", "مراحل العمل", parsed.data.title);
   revalidate();
   redirect("/admin/process");
 }
@@ -34,6 +36,7 @@ export async function updateProcessStep(id: string, _prev: CrudState, fd: FormDa
   const parsed = schema.safeParse(Object.fromEntries(fd));
   if (!parsed.success) return zodErrors(parsed.error);
   await prisma.processStep.update({ where: { id }, data: parsed.data });
+  await logAudit("update", "مراحل العمل", parsed.data.title);
   revalidate();
   redirect("/admin/process");
 }
@@ -41,5 +44,6 @@ export async function updateProcessStep(id: string, _prev: CrudState, fd: FormDa
 export async function deleteProcessStep(id: string) {
   if (!(await auth())?.user) return;
   await prisma.processStep.delete({ where: { id } });
+  await logAudit("delete", "مراحل العمل");
   revalidate();
 }

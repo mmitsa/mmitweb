@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/auth";
 import { zodErrors } from "@/lib/form";
+import { logAudit } from "@/lib/audit";
 import type { CrudState } from "@/components/admin/crud-form";
 
 const schema = z.object({
@@ -25,6 +26,7 @@ export async function createAdvantage(_prev: CrudState, fd: FormData): Promise<C
   const parsed = schema.safeParse(Object.fromEntries(fd));
   if (!parsed.success) return zodErrors(parsed.error);
   await prisma.advantage.create({ data: parsed.data });
+  await logAudit("create", "المزايا", parsed.data.title);
   revalidate();
   redirect("/admin/advantages");
 }
@@ -34,6 +36,7 @@ export async function updateAdvantage(id: string, _prev: CrudState, fd: FormData
   const parsed = schema.safeParse(Object.fromEntries(fd));
   if (!parsed.success) return zodErrors(parsed.error);
   await prisma.advantage.update({ where: { id }, data: parsed.data });
+  await logAudit("update", "المزايا", parsed.data.title);
   revalidate();
   redirect("/admin/advantages");
 }
@@ -41,5 +44,6 @@ export async function updateAdvantage(id: string, _prev: CrudState, fd: FormData
 export async function deleteAdvantage(id: string) {
   if (!(await auth())?.user) return;
   await prisma.advantage.delete({ where: { id } });
+  await logAudit("delete", "المزايا");
   revalidate();
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
+import Script from "next/script";
 import { Icon } from "@/components/icon";
 import { submitContact, type ContactState } from "@/app/(site)/contact/actions";
 
@@ -24,7 +25,7 @@ function FieldError({ message }: { message?: string }) {
   return <p className="mt-1 text-sm text-error">{message}</p>;
 }
 
-export function ContactForm() {
+export function ContactForm({ turnstileSiteKey }: { turnstileSiteKey?: string }) {
   const [state, formAction, isPending] = useActionState(
     submitContact,
     initialState
@@ -112,6 +113,12 @@ export function ContactForm() {
           <textarea id="message" name="message" rows={5} required placeholder="اكتب تفاصيل مشروعك أو استفسارك هنا..." className={`${inputClasses} resize-none`} />
           <FieldError message={state.errors?.message} />
         </div>
+        {turnstileSiteKey && (
+          <>
+            <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="afterInteractive" />
+            <div className="cf-turnstile" data-sitekey={turnstileSiteKey} data-language="ar" />
+          </>
+        )}
         <div className="flex justify-end pt-2">
           <button
             type="submit"

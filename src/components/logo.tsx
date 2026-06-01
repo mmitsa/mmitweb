@@ -11,15 +11,17 @@ import { cn } from "@/lib/utils";
 export function Logo({
   className,
   tone = "color",
+  src,
 }: {
   className?: string;
   tone?: "color" | "white";
+  src?: string;
 }) {
-  const src = tone === "white" ? "/brand/logo-mark-white.svg" : "/brand/logo-mark.svg";
+  const resolved = src || (tone === "white" ? "/brand/logo-mark-white.svg" : "/brand/logo-mark.svg");
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      src={src}
+      src={resolved}
       alt="مسارات المستكشف"
       className={cn("h-9 w-auto select-none", className)}
       draggable={false}

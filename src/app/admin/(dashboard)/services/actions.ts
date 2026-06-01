@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/auth";
+import { logAudit } from "@/lib/audit";
 import { zodErrors, parseLines } from "@/lib/form";
 import type { CrudState } from "@/components/admin/crud-form";
 
@@ -32,6 +33,7 @@ export async function createService(_prev: CrudState, fd: FormData): Promise<Cru
     return { error: "المعرّف مستخدم.", fieldErrors: { slug: "هذا المعرّف مستخدم مسبقًا" } };
   }
   await prisma.service.create({ data: { ...parsed.data, features: parseLines(fd.get("features")) } });
+  await logAudit("create", "خدمة");
   revalidate();
   redirect("/admin/services");
 }
@@ -45,6 +47,7 @@ export async function updateService(id: string, _prev: CrudState, fd: FormData):
     return { error: "المعرّف مستخدم.", fieldErrors: { slug: "هذا المعرّف مستخدم مسبقًا" } };
   }
   await prisma.service.update({ where: { id }, data: { ...parsed.data, features: parseLines(fd.get("features")) } });
+  await logAudit("update", "خدمة");
   revalidate();
   redirect("/admin/services");
 }
@@ -52,5 +55,6 @@ export async function updateService(id: string, _prev: CrudState, fd: FormData):
 export async function deleteService(id: string) {
   if (!(await auth())?.user) return;
   await prisma.service.delete({ where: { id } });
+  await logAudit("delete", "خدمة");
   revalidate();
 }

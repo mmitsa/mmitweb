@@ -6,6 +6,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/auth";
+import { logAudit } from "@/lib/audit";
 import { zodErrors } from "@/lib/form";
 import type { CrudState } from "@/components/admin/crud-form";
 
@@ -41,6 +42,7 @@ export async function createUser(_prev: CrudState, fd: FormData): Promise<CrudSt
       passwordHash: await bcrypt.hash(parsed.data.password, 10),
     },
   });
+  await logAudit("create", "مستخدم");
   revalidatePath("/admin/users");
   redirect("/admin/users");
 }
@@ -61,6 +63,7 @@ export async function updateUser(id: string, _prev: CrudState, fd: FormData): Pr
   };
   if (parsed.data.password) data.passwordHash = await bcrypt.hash(parsed.data.password, 10);
   await prisma.user.update({ where: { id }, data });
+  await logAudit("update", "مستخدم");
   revalidatePath("/admin/users");
   redirect("/admin/users");
 }
@@ -73,5 +76,6 @@ export async function deleteUser(id: string) {
   const target = await prisma.user.findUnique({ where: { id } });
   if (target?.role === "admin" && admins <= 1) return; // keep at least one admin
   await prisma.user.delete({ where: { id } });
+  await logAudit("delete", "مستخدم");
   revalidatePath("/admin/users");
 }

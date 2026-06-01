@@ -3,7 +3,9 @@ import { notFound } from "next/navigation";
 import { Icon } from "@/components/icon";
 import { DeleteButton } from "@/components/admin/delete-button";
 import { prisma } from "@/lib/prisma";
-import { deleteInquiry, setInquiryRead } from "../actions";
+import { cn } from "@/lib/utils";
+import { INQUIRY_STATUSES, STATUS_LABEL, STATUS_COLOR } from "@/lib/inquiry-status";
+import { deleteInquiry, setInquiryRead, setInquiryStatus } from "../actions";
 
 export const dynamic = "force-dynamic";
 
@@ -55,6 +57,22 @@ export default async function InquiryDetail({
               </button>
             </form>
             <DeleteButton action={deleteInquiry.bind(null, inquiry.id)} />
+          </div>
+        </div>
+
+        <div className="mb-6 flex flex-wrap items-center gap-3">
+          <span className="font-head text-sm text-on-surface-variant">الحالة:</span>
+          <span className={cn("inline-flex rounded-full px-3 py-1 text-xs font-medium", STATUS_COLOR[inquiry.status])}>
+            {STATUS_LABEL[inquiry.status] ?? inquiry.status}
+          </span>
+          <div className="flex items-center gap-1">
+            {INQUIRY_STATUSES.filter((s) => s !== inquiry.status).map((s) => (
+              <form key={s} action={setInquiryStatus.bind(null, inquiry.id, s)}>
+                <button type="submit" className="rounded-lg border border-outline-variant px-3 py-1.5 font-head text-xs text-on-surface-variant transition-colors hover:border-secondary hover:text-secondary">
+                  نقل إلى: {STATUS_LABEL[s]}
+                </button>
+              </form>
+            ))}
           </div>
         </div>
 

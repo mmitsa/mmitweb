@@ -30,9 +30,15 @@ export default async function SettingsPage() {
             phoneDisplay: s.phoneDisplay,
             whatsapp: s.whatsapp,
             address: s.address,
+            logo: s.logo ?? "",
+            logoWhite: s.logoWhite ?? "",
             inquiryEmail: s.inquiryEmail ?? "",
             emailFrom: s.emailFrom ?? "",
+            turnstileSiteKey: s.turnstileSiteKey ?? "",
+            telegramChatId: s.telegramChatId ?? "",
             hasApiKey: Boolean(s.resendApiKey),
+            hasTurnstileSecret: Boolean(s.turnstileSecretKey),
+            hasTelegramToken: Boolean(s.telegramBotToken),
           }}
         />
       </div>

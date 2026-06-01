@@ -22,7 +22,7 @@ export default async function SiteLayout({
         تخطٍّ إلى المحتوى
       </a>
       <OrganizationJsonLd settings={{ name: s.name, url: s.url, email: s.email, phone: s.phone }} />
-      <Navbar siteName={s.name} />
+      <Navbar siteName={s.name} logo={("logo" in s && s.logo) || undefined} />
       <main id="main-content" className="flex-grow">
         {children}
       </main>
@@ -33,6 +33,7 @@ export default async function SiteLayout({
           phone: s.phone,
           phoneDisplay: s.phoneDisplay,
           address: s.address,
+          logoWhite: ("logoWhite" in s && s.logoWhite) || undefined,
         }}
       />
       <WhatsAppFab whatsapp={s.whatsapp} />

@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/auth";
 import { zodErrors } from "@/lib/form";
+import { logAudit } from "@/lib/audit";
 import type { CrudState } from "@/components/admin/crud-form";
 
 const schema = z.object({
@@ -25,6 +26,7 @@ export async function createSector(_prev: CrudState, fd: FormData): Promise<Crud
   const parsed = schema.safeParse(Object.fromEntries(fd));
   if (!parsed.success) return zodErrors(parsed.error);
   await prisma.sector.create({ data: parsed.data });
+  await logAudit("create", "القطاعات", parsed.data.title);
   revalidate();
   redirect("/admin/sectors");
 }
@@ -34,6 +36,7 @@ export async function updateSector(id: string, _prev: CrudState, fd: FormData): 
   const parsed = schema.safeParse(Object.fromEntries(fd));
   if (!parsed.success) return zodErrors(parsed.error);
   await prisma.sector.update({ where: { id }, data: parsed.data });
+  await logAudit("update", "القطاعات", parsed.data.title);
   revalidate();
   redirect("/admin/sectors");
 }
@@ -41,5 +44,6 @@ export async function updateSector(id: string, _prev: CrudState, fd: FormData): 
 export async function deleteSector(id: string) {
   if (!(await auth())?.user) return;
   await prisma.sector.delete({ where: { id } });
+  await logAudit("delete", "القطاعات");
   revalidate();
 }

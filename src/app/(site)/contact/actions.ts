@@ -44,6 +44,34 @@ async function isRateLimited(ip: string): Promise<boolean> {
   return isRateLimitedInMemory(ip);
 }
 
+async function verifyTurnstile(secret: string, token: string, ip: string): Promise<boolean> {
+  try {
+    const body = new URLSearchParams({ secret, response: token });
+    if (ip && ip !== "unknown") body.set("remoteip", ip);
+    const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      body,
+    });
+    const json = (await res.json()) as { success?: boolean };
+    return Boolean(json.success);
+  } catch (err) {
+    console.error("[contact] turnstile verify failed:", err);
+    return false;
+  }
+}
+
+async function notifyTelegram(token: string, chatId: string, text: string) {
+  try {
+    await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ chat_id: chatId, text, disable_web_page_preview: true }),
+    });
+  } catch (err) {
+    console.error("[contact] telegram notify failed:", err);
+  }
+}
+
 const schema = z.object({
   name: z.string().trim().min(2, "الرجاء إدخال الاسم الكامل"),
   email: z.string().trim().email("البريد الإلكتروني غير صحيح"),
@@ -80,6 +108,16 @@ export async function submitContact(
     };
   }
 
+  const settings = await getSettings();
+
+  // Spam protection: verify Cloudflare Turnstile when configured.
+  if (settings?.turnstileSecretKey) {
+    const token = String(formData.get("cf-turnstile-response") ?? "");
+    if (!token || !(await verifyTurnstile(settings.turnstileSecretKey, token, ip))) {
+      return { status: "error", message: "فشل التحقق من أنك لست روبوتًا. الرجاء إعادة المحاولة." };
+    }
+  }
+
   const parsed = schema.safeParse({
     name: formData.get("name"),
     email: formData.get("email"),
@@ -109,31 +147,40 @@ export async function submitContact(
     return { status: "error", message: "تعذّر استلام رسالتك حاليًا. الرجاء المحاولة لاحقًا." };
   }
 
-  // 2) Optionally email a copy, using the settings configured in the admin
+  const summary = [
+    `الاسم: ${name}`,
+    `البريد: ${email}`,
+    `الجوال: ${mobile || "—"}`,
+    `الخدمة: ${service || "—"}`,
+    "",
+    "الرسالة:",
+    message,
+  ].join("\n");
+
+  // 2) Instant Telegram notification (if configured).
+  if (settings?.telegramBotToken && settings?.telegramChatId) {
+    await notifyTelegram(settings.telegramBotToken, settings.telegramChatId, `📨 استفسار جديد\n\n${summary}`);
+  }
+
+  // 3) Optionally email a copy, using the settings configured in the admin
   //    (falling back to env vars). Email failure does not lose the inquiry.
-  const settings = await getSettings();
   const apiKey = settings?.resendApiKey || process.env.RESEND_API_KEY;
   if (apiKey) {
     try {
       const resend = new Resend(apiKey);
-      const to = settings?.inquiryEmail || settings?.email || process.env.CONTACT_TO_EMAIL || site.email;
+      const recipients = (settings?.inquiryEmail || settings?.email || process.env.CONTACT_TO_EMAIL || site.email)
+        .split(",")
+        .map((s) => s.trim())
+        .filter(Boolean);
       const from = settings?.emailFrom || process.env.CONTACT_FROM_EMAIL || "onboarding@resend.dev";
       const brand = settings?.name || site.name;
 
       const { error } = await resend.emails.send({
         from: `${brand} <${from}>`,
-        to,
+        to: recipients,
         replyTo: email,
         subject: `استفسار جديد من الموقع — ${name}`,
-        text: [
-          `الاسم: ${name}`,
-          `البريد: ${email}`,
-          `الجوال: ${mobile || "—"}`,
-          `الخدمة: ${service || "—"}`,
-          "",
-          "الرسالة:",
-          message,
-        ].join("\n"),
+        text: summary,
       });
       if (error) console.error("[contact] Resend error:", error);
     } catch (err) {

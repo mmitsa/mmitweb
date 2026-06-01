@@ -165,6 +165,30 @@ cp -r .next/static .next/standalone/.next/static
 pm2 restart mmitweb       # أو: sudo systemctl restart mmitweb
 ```
 
+## النسخ الاحتياطي التلقائي
+
+سكربت جاهز [`scripts/backup.sh`](scripts/backup.sh) ينشئ نسخة مضغوطة من قاعدة
+البيانات ويحتفظ بآخر 14 نسخة.
+
+```bash
+./scripts/backup.sh                 # نسخة فورية إلى ./backups
+BACKUP_DIR=/var/backups/mmit ./scripts/backup.sh
+```
+
+جدوله يوميًا عبر cron (الساعة 3 فجرًا):
+
+```cron
+0 3 * * * cd /var/www/mmitweb && BACKUP_DIR=/var/backups/mmit ./scripts/backup.sh >> /var/log/mmit-backup.log 2>&1
+```
+
+## ميزات لوحة التحكم الإضافية
+
+- **الحماية من السبام**: فعّل Cloudflare Turnstile بإدخال المفتاحين في الإعدادات.
+- **تنبيه فوري بالاستفسارات**: أدخل Telegram Bot Token + Chat ID في الإعدادات.
+- **سجل التدقيق** (`/admin/audit`، للمدير): يسجّل كل إضافة/تعديل/حذف.
+- **تصدير الاستفسارات** CSV وفلترتها وتغيير حالتها (جديد/قيد المعالجة/مغلق).
+- **رفع الشعار** من الإعدادات (يتجاوز الشعار الافتراضي).
+
 ## ملاحظات
 
 - **ترويسات الأمان** (HSTS, nosniff, ...) مضبوطة في [`next.config.ts`](next.config.ts).

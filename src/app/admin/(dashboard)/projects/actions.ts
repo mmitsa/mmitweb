@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/auth";
+import { logAudit } from "@/lib/audit";
 import { zodErrors } from "@/lib/form";
 import type { CrudState } from "@/components/admin/crud-form";
 
@@ -28,6 +29,7 @@ export async function createProject(_prev: CrudState, fd: FormData): Promise<Cru
   const parsed = schema.safeParse(Object.fromEntries(fd));
   if (!parsed.success) return zodErrors(parsed.error);
   await prisma.project.create({ data: parsed.data });
+  await logAudit("create", "مشروع");
   revalidate();
   redirect("/admin/projects");
 }
@@ -37,6 +39,7 @@ export async function updateProject(id: string, _prev: CrudState, fd: FormData):
   const parsed = schema.safeParse(Object.fromEntries(fd));
   if (!parsed.success) return zodErrors(parsed.error);
   await prisma.project.update({ where: { id }, data: parsed.data });
+  await logAudit("update", "مشروع");
   revalidate();
   redirect("/admin/projects");
 }
@@ -44,5 +47,6 @@ export async function updateProject(id: string, _prev: CrudState, fd: FormData):
 export async function deleteProject(id: string) {
   if (!(await auth())?.user) return;
   await prisma.project.delete({ where: { id } });
+  await logAudit("delete", "مشروع");
   revalidate();
 }

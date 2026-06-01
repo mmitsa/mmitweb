@@ -28,10 +28,19 @@ model Settings {
   phoneDisplay String
   whatsapp     String
   address      String
+  // Logos (override the bundled brand mark; managed from the admin)
+  logo         String?
+  logoWhite    String?
   // Email / inquiry delivery (managed from the admin)
-  inquiryEmail String?
+  inquiryEmail String? // recipient(s) — comma-separated allowed
   emailFrom    String?
   resendApiKey String?
+  // Spam protection (Cloudflare Turnstile)
+  turnstileSiteKey   String?
+  turnstileSecretKey String?
+  // Instant notifications (Telegram)
+  telegramBotToken String?
+  telegramChatId   String?
   updatedAt    DateTime @updatedAt
 }
 
@@ -44,6 +53,16 @@ model Inquiry {
   service   String?
   message   String
   read      Boolean  @default(false)
+  status    String   @default("new") // "new" | "in_progress" | "closed"
+  createdAt DateTime @default(now())
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  userEmail String
+  action    String // "create" | "update" | "delete"
+  entity    String
+  label     String?
   createdAt DateTime @default(now())
 }
 

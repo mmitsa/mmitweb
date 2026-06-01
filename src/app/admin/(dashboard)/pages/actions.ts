@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/auth";
+import { logAudit } from "@/lib/audit";
 import { zodErrors } from "@/lib/form";
 import { parseBlocks } from "@/lib/blocks";
 import type { CrudState } from "@/components/admin/crud-form";
@@ -52,6 +53,7 @@ export async function createPage(_prev: CrudState, fd: FormData): Promise<CrudSt
       blocks: readBlocks(fd),
     },
   });
+  await logAudit("create", "صفحة");
   revalidate(parsed.data.slug);
   redirect("/admin/pages");
 }
@@ -77,6 +79,7 @@ export async function updatePage(id: string, _prev: CrudState, fd: FormData): Pr
       blocks: readBlocks(fd),
     },
   });
+  await logAudit("update", "صفحة");
   revalidate(parsed.data.slug);
   redirect("/admin/pages");
 }
@@ -84,5 +87,6 @@ export async function updatePage(id: string, _prev: CrudState, fd: FormData): Pr
 export async function deletePage(id: string) {
   if (!(await auth())?.user) return;
   const page = await prisma.page.delete({ where: { id } });
+  await logAudit("delete", "صفحة");
   revalidate(page.slug);
 }

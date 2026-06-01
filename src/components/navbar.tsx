@@ -8,7 +8,7 @@ import { Logo } from "@/components/logo";
 import { cn } from "@/lib/utils";
 import { navItems } from "@/lib/site";
 
-export function Navbar({ siteName }: { siteName: string }) {
+export function Navbar({ siteName, logo }: { siteName: string; logo?: string }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -38,7 +38,7 @@ export function Navbar({ siteName }: { siteName: string }) {
           href="/"
           className="flex items-center gap-2 text-2xl font-head font-bold text-primary transition-opacity hover:opacity-80"
         >
-          <Logo className="h-8 w-auto" />
+          <Logo src={logo} className="h-8 w-auto" />
           <span>{siteName}</span>
         </Link>
 

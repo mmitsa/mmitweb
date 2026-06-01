@@ -4,6 +4,7 @@ import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/auth";
+import { logAudit } from "@/lib/audit";
 
 const schema = z.object({
   name: z.string().trim().min(1, "مطلوب"),
@@ -14,8 +15,12 @@ const schema = z.object({
   phoneDisplay: z.string().trim().min(1, "مطلوب"),
   whatsapp: z.string().trim().min(1, "مطلوب"),
   address: z.string().trim().min(1, "مطلوب"),
-  inquiryEmail: z.string().trim().email("بريد غير صحيح").or(z.literal("")).optional(),
+  logo: z.string().trim().optional(),
+  logoWhite: z.string().trim().optional(),
+  inquiryEmail: z.string().trim().optional(),
   emailFrom: z.string().trim().optional(),
+  turnstileSiteKey: z.string().trim().optional(),
+  telegramChatId: z.string().trim().optional(),
 });
 
 export type SettingsState = {
@@ -34,25 +39,35 @@ export async function updateSettings(
   const parsed = schema.safeParse(Object.fromEntries(formData));
   if (!parsed.success) {
     const fieldErrors: Record<string, string> = {};
-    for (const issue of parsed.error.issues) {
-      fieldErrors[String(issue.path[0])] = issue.message;
-    }
+    for (const issue of parsed.error.issues) fieldErrors[String(issue.path[0])] = issue.message;
     return { error: "يرجى تصحيح الحقول المميّزة.", fieldErrors };
   }
 
-  const { inquiryEmail, emailFrom, ...rest } = parsed.data;
-  // Only overwrite the API key when a new value is provided.
-  const key = String(formData.get("resendApiKey") ?? "").trim();
+  const { logo, logoWhite, inquiryEmail, emailFrom, turnstileSiteKey, telegramChatId, ...rest } = parsed.data;
+
+  // Secrets: only overwrite when a new value is supplied.
+  const secret = (key: string) => {
+    const v = String(formData.get(key) ?? "").trim();
+    return v ? { [key]: v } : {};
+  };
 
   await prisma.settings.update({
     where: { id: 1 },
     data: {
       ...rest,
+      logo: logo || null,
+      logoWhite: logoWhite || null,
       inquiryEmail: inquiryEmail || null,
       emailFrom: emailFrom || null,
-      ...(key ? { resendApiKey: key } : {}),
+      turnstileSiteKey: turnstileSiteKey || null,
+      telegramChatId: telegramChatId || null,
+      ...secret("resendApiKey"),
+      ...secret("turnstileSecretKey"),
+      ...secret("telegramBotToken"),
     },
   });
+
+  await logAudit("update", "الإعدادات");
   revalidatePath("/");
   revalidatePath("/admin/settings");
   return { ok: true };

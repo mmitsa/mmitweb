@@ -29,7 +29,7 @@ export default async function ContactPage() {
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
             {/* Form */}
             <div className="lg:col-span-8">
-              <ContactForm />
+              <ContactForm turnstileSiteKey={("turnstileSiteKey" in site && site.turnstileSiteKey) || undefined} />
             </div>
 
             {/* Info sidebar */}

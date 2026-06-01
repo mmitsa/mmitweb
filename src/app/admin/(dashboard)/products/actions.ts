@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/auth";
+import { logAudit } from "@/lib/audit";
 import { zodErrors, parseLines } from "@/lib/form";
 import type { CrudState } from "@/components/admin/crud-form";
 
@@ -38,6 +39,7 @@ export async function createProduct(_prev: CrudState, fd: FormData): Promise<Cru
     return { error: "المعرّف مستخدم.", fieldErrors: { slug: "هذا المعرّف مستخدم مسبقًا" } };
   }
   await prisma.product.create({ data: data(parsed.data, fd) });
+  await logAudit("create", "منتج");
   revalidate();
   redirect("/admin/products");
 }
@@ -51,6 +53,7 @@ export async function updateProduct(id: string, _prev: CrudState, fd: FormData):
     return { error: "المعرّف مستخدم.", fieldErrors: { slug: "هذا المعرّف مستخدم مسبقًا" } };
   }
   await prisma.product.update({ where: { id }, data: data(parsed.data, fd) });
+  await logAudit("update", "منتج");
   revalidate();
   redirect("/admin/products");
 }
@@ -58,5 +61,6 @@ export async function updateProduct(id: string, _prev: CrudState, fd: FormData):
 export async function deleteProduct(id: string) {
   if (!(await auth())?.user) return;
   await prisma.product.delete({ where: { id } });
+  await logAudit("delete", "منتج");
   revalidate();
 }

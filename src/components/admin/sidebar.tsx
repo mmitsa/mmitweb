@@ -21,7 +21,10 @@ const items = [
   { href: "/admin/process", label: "مراحل العمل", icon: "timeline" },
   { href: "/admin/pages", label: "الصفحات", icon: "article" },
   { href: "/admin/users", label: "المستخدمون", icon: "group" },
+  { href: "/admin/audit", label: "سجل التدقيق", icon: "history" },
 ];
+
+const adminOnly = new Set(["/admin/users", "/admin/audit"]);
 
 export function AdminSidebar({
   user,
@@ -34,7 +37,7 @@ export function AdminSidebar({
   const isActive = (href: string) =>
     href === "/admin" ? pathname === "/admin" : pathname.startsWith(href);
   const visible = items.filter(
-    (it) => it.href !== "/admin/users" || user?.role === "admin"
+    (it) => !adminOnly.has(it.href) || user?.role === "admin"
   );
 
   return (
