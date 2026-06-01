@@ -24,7 +24,7 @@ const items = [
   { href: "/admin/audit", label: "سجل التدقيق", icon: "history" },
 ];
 
-const adminOnly = new Set(["/admin/users", "/admin/audit"]);
+const adminOnly = new Set(["/admin/settings", "/admin/users", "/admin/audit"]);
 
 export function AdminSidebar({
   user,

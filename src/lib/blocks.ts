@@ -88,7 +88,9 @@ export function parseBlocks(value: unknown): Block[] {
     } else if (type === "hero") {
       out.push({ type, eyebrow: str("eyebrow"), title: str("title"), subtitle: str("subtitle") });
     } else if (type === "cta") {
-      out.push({ type, title: str("title"), text: str("text"), buttonLabel: str("buttonLabel"), buttonHref: str("buttonHref") });
+      const href = str("buttonHref");
+      const safeHref = /^(https?:\/\/|\/|#|tel:|mailto:)/i.test(href) ? href : "/contact";
+      out.push({ type, title: str("title"), text: str("text"), buttonLabel: str("buttonLabel"), buttonHref: safeHref });
     } else if (type === "image") {
       out.push({ type, src: str("src"), alt: str("alt") });
     } else {

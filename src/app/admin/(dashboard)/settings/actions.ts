@@ -34,7 +34,7 @@ export async function updateSettings(
   formData: FormData
 ): Promise<SettingsState> {
   const session = await auth();
-  if (!session?.user) return { error: "غير مصرّح." };
+  if (session?.user?.role !== "admin") return { error: "غير مصرّح. الإعدادات للمدير فقط." };
 
   const parsed = schema.safeParse(Object.fromEntries(formData));
   if (!parsed.success) {
@@ -51,20 +51,23 @@ export async function updateSettings(
     return v ? { [key]: v } : {};
   };
 
-  await prisma.settings.update({
+  const data = {
+    ...rest,
+    logo: logo || null,
+    logoWhite: logoWhite || null,
+    inquiryEmail: inquiryEmail || null,
+    emailFrom: emailFrom || null,
+    turnstileSiteKey: turnstileSiteKey || null,
+    telegramChatId: telegramChatId || null,
+    ...secret("resendApiKey"),
+    ...secret("turnstileSecretKey"),
+    ...secret("telegramBotToken"),
+  };
+
+  await prisma.settings.upsert({
     where: { id: 1 },
-    data: {
-      ...rest,
-      logo: logo || null,
-      logoWhite: logoWhite || null,
-      inquiryEmail: inquiryEmail || null,
-      emailFrom: emailFrom || null,
-      turnstileSiteKey: turnstileSiteKey || null,
-      telegramChatId: telegramChatId || null,
-      ...secret("resendApiKey"),
-      ...secret("turnstileSecretKey"),
-      ...secret("telegramBotToken"),
-    },
+    update: data,
+    create: { id: 1, ...data },
   });
 
   await logAudit("update", "الإعدادات");

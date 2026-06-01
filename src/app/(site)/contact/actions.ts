@@ -90,12 +90,7 @@ export async function submitContact(
   _prev: ContactState,
   formData: FormData
 ): Promise<ContactState> {
-  // Honeypot: real users never fill this hidden field.
-  if (typeof formData.get("company") === "string" && formData.get("company")) {
-    return { status: "success", message: "تم استلام رسالتك بنجاح." };
-  }
-
-  // Rate limit by client IP.
+  // Rate limit by client IP first (counts every attempt, including bots).
   const hdrs = await headers();
   const ip =
     (hdrs.get("x-forwarded-for") ?? "").split(",")[0].trim() ||
@@ -106,6 +101,11 @@ export async function submitContact(
       status: "error",
       message: "لقد أرسلت عدة رسائل خلال فترة قصيرة. الرجاء المحاولة بعد قليل.",
     };
+  }
+
+  // Honeypot: real users never fill this hidden field — silently accept & drop.
+  if (typeof formData.get("company") === "string" && formData.get("company")) {
+    return { status: "success", message: "تم استلام رسالتك بنجاح." };
   }
 
   const settings = await getSettings();
