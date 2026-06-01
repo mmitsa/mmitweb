@@ -1,9 +1,7 @@
-import { site } from "@/lib/site";
-
-export function WhatsAppFab() {
+export function WhatsAppFab({ whatsapp }: { whatsapp: string }) {
   return (
     <a
-      href={`https://wa.me/${site.whatsapp}`}
+      href={`https://wa.me/${whatsapp}`}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="محادثة عبر واتساب"

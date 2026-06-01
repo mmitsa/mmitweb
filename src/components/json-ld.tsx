@@ -1,14 +1,20 @@
-import { site } from "@/lib/site";
+export type OrgSettings = {
+  name: string;
+  url: string;
+  email: string;
+  phone: string;
+};
 
-export function OrganizationJsonLd() {
+export function OrganizationJsonLd({ settings }: { settings: OrgSettings }) {
+  const tel = `+966${settings.phone.replace(/^0/, "")}`;
   const data = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: site.name,
+    name: settings.name,
     alternateName: "MMIT",
-    url: site.url,
-    email: site.email,
-    telephone: `+966${site.phone.replace(/^0/, "")}`,
+    url: settings.url,
+    email: settings.email,
+    telephone: tel,
     description:
       "مسارات المستكشف للاتصالات وتقنية المعلومات — حلول الاتصالات والشبكات، البنية التحتية، الأمن السيبراني، والتحول الرقمي في المملكة العربية السعودية.",
     areaServed: "SA",
@@ -16,11 +22,10 @@ export function OrganizationJsonLd() {
       "@type": "PostalAddress",
       addressCountry: "SA",
       addressRegion: "الرياض",
-      addressLocality: "حي الصحافة",
     },
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: `+966${site.phone.replace(/^0/, "")}`,
+      telephone: tel,
       contactType: "customer service",
       areaServed: "SA",
       availableLanguage: ["Arabic", "English"],
@@ -37,8 +42,10 @@ export function OrganizationJsonLd() {
 
 export function BreadcrumbJsonLd({
   items,
+  baseUrl,
 }: {
   items: { name: string; path: string }[];
+  baseUrl: string;
 }) {
   const data = {
     "@context": "https://schema.org",
@@ -47,7 +54,7 @@ export function BreadcrumbJsonLd({
       "@type": "ListItem",
       position: i + 1,
       name: it.name,
-      item: `${site.url}${it.path}`,
+      item: `${baseUrl}${it.path}`,
     })),
   };
   return (

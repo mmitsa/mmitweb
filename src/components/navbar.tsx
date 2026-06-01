@@ -6,9 +6,9 @@ import { usePathname } from "next/navigation";
 import { Icon } from "@/components/icon";
 import { Logo } from "@/components/logo";
 import { cn } from "@/lib/utils";
-import { navItems, site } from "@/lib/site";
+import { navItems } from "@/lib/site";
 
-export function Navbar() {
+export function Navbar({ siteName }: { siteName: string }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -39,7 +39,7 @@ export function Navbar() {
           className="flex items-center gap-2 text-2xl font-head font-bold text-primary transition-opacity hover:opacity-80"
         >
           <Logo className="h-8 w-auto" />
-          <span>{site.name}</span>
+          <span>{siteName}</span>
         </Link>
 
         {/* Desktop links */}

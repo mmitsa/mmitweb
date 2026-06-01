@@ -5,7 +5,9 @@ import { Icon } from "@/components/icon";
 import { PageHero } from "@/components/section";
 import { ProductCard } from "@/components/cards";
 import { Reveal } from "@/components/reveal";
-import { products } from "@/lib/site";
+import { getProducts } from "@/lib/data";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "منتجاتنا",
@@ -13,7 +15,8 @@ export const metadata: Metadata = {
     "منظومة «مسارات» من الأنظمة الرقمية المتكاملة: مسارات HR، سداد، أرشفة، مستودعات، دعم، تحليل، وأملاك.",
 };
 
-export default function ProductsPage() {
+export default async function ProductsPage() {
+  const products = await getProducts();
   return (
     <>
       <PageHero
@@ -26,7 +29,7 @@ export default function ProductsPage() {
         <Container>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {products.map((p, i) => (
-              <Reveal key={p.slug} delay={(i % 3) * 90}>
+              <Reveal key={p.id} delay={(i % 3) * 90}>
                 <ProductCard product={p} />
               </Reveal>
             ))}

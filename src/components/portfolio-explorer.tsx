@@ -3,9 +3,17 @@
 import { useMemo, useState } from "react";
 import { Icon } from "@/components/icon";
 import { cn } from "@/lib/utils";
-import { projectCategories, projects, type ProjectCategory } from "@/lib/site";
+import { projectCategories, type ProjectCategory } from "@/lib/site";
 
-const categoryIcons: Record<ProjectCategory, string> = {
+export type PortfolioProject = {
+  id: string;
+  client: string;
+  work: string;
+  status: string;
+  category: string;
+};
+
+const categoryIcons: Record<string, string> = {
   "تطوير برمجيات": "code",
   "أنظمة مراقبة": "videocam",
   "صيانة تقنية": "build",
@@ -15,7 +23,7 @@ const categoryIcons: Record<ProjectCategory, string> = {
 type CategoryFilter = "الكل" | ProjectCategory;
 type StatusFilter = "الكل" | "قائم" | "منتهي";
 
-export function PortfolioExplorer() {
+export function PortfolioExplorer({ projects }: { projects: PortfolioProject[] }) {
   const [category, setCategory] = useState<CategoryFilter>("الكل");
   const [status, setStatus] = useState<StatusFilter>("الكل");
 
@@ -23,7 +31,7 @@ export function PortfolioExplorer() {
     const clients = new Set(projects.map((p) => p.client));
     const active = projects.filter((p) => p.status === "قائم").length;
     return { total: projects.length, active, clients: clients.size };
-  }, []);
+  }, [projects]);
 
   const filtered = projects.filter(
     (p) =>

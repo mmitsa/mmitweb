@@ -5,11 +5,9 @@ import { Container } from "@/components/container";
 import { ButtonLink } from "@/components/button";
 import { Icon } from "@/components/icon";
 import { BreadcrumbJsonLd } from "@/components/json-ld";
-import { getProduct, products, site } from "@/lib/site";
+import { getProduct, getProducts, getSettings } from "@/lib/data";
 
-export function generateStaticParams() {
-  return products.map((p) => ({ slug: p.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
@@ -17,7 +15,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const product = getProduct(slug);
+  const product = await getProduct(slug);
   if (!product) return { title: "المنتج غير موجود" };
   return {
     title: product.title,
@@ -32,14 +30,21 @@ export default async function ProductDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const product = getProduct(slug);
+  const [product, all, settings] = await Promise.all([
+    getProduct(slug),
+    getProducts(),
+    getSettings(),
+  ]);
   if (!product) notFound();
 
-  const related = products.filter((p) => p.slug !== product.slug).slice(0, 3);
+  const related = all.filter((p) => p.slug !== product.slug).slice(0, 3);
+  const whatsapp = settings?.whatsapp ?? "966536930366";
+  const baseUrl = settings?.url ?? "https://mmit.sa";
 
   return (
     <>
       <BreadcrumbJsonLd
+        baseUrl={baseUrl}
         items={[
           { name: "الرئيسية", path: "/" },
           { name: "المنتجات", path: "/products" },
@@ -119,7 +124,7 @@ export default async function ProductDetailPage({
                     اطلب عرضًا توضيحيًا
                   </ButtonLink>
                   <a
-                    href={`https://wa.me/${site.whatsapp}`}
+                    href={`https://wa.me/${whatsapp}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex w-full items-center justify-center gap-2 rounded border border-outline-variant py-3 font-head text-sm text-on-surface-variant transition-colors hover:bg-surface-container"

@@ -4,7 +4,9 @@ import { ButtonLink } from "@/components/button";
 import { Icon } from "@/components/icon";
 import { PageHero } from "@/components/section";
 import { Reveal } from "@/components/reveal";
-import { partners, projects, site } from "@/lib/site";
+import { getPartners, getProjects, getSettings } from "@/lib/data";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "شركاؤنا",
@@ -12,11 +14,15 @@ export const metadata: Metadata = {
     "شركاء النجاح لمسارات المستكشف من الجهات الحكومية والمؤسسات في المملكة: وزارة الصحة، وزارة الداخلية، المركز السعودي لكفاءة الطاقة، وأمانات وبلديات المناطق.",
 };
 
-function projectCount(partnerName: string): number {
-  return projects.filter((p) => p.client.includes(partnerName)).length;
-}
-
-export default function PartnersPage() {
+export default async function PartnersPage() {
+  const [partners, projects, settings] = await Promise.all([
+    getPartners(),
+    getProjects(),
+    getSettings(),
+  ]);
+  const projectCount = (partnerName: string) =>
+    projects.filter((p) => p.client.includes(partnerName)).length;
+  const whatsapp = settings?.whatsapp ?? "966536930366";
   return (
     <>
       <PageHero
@@ -81,7 +87,7 @@ export default function PartnersPage() {
           </p>
           <div className="mt-8 flex justify-center">
             <ButtonLink
-              href={`https://wa.me/${site.whatsapp}`}
+              href={`https://wa.me/${whatsapp}`}
               variant="dark"
               className="bg-on-secondary text-secondary hover:bg-white"
             >

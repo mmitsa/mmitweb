@@ -9,9 +9,19 @@ import { ServiceCard, ProductCard, AdvantageCard } from "@/components/cards";
 import { Stats, ClientsStrip } from "@/components/stats";
 import { Process } from "@/components/process";
 import { Sectors } from "@/components/sectors";
-import { advantages, products, services } from "@/lib/site";
+import { advantages } from "@/lib/site";
+import { getServices, getProducts, getProjects } from "@/lib/data";
 
-export default function HomePage() {
+export const dynamic = "force-dynamic";
+
+export default async function HomePage() {
+  const [services, products, projects] = await Promise.all([
+    getServices(),
+    getProducts(),
+    getProjects(),
+  ]);
+  const clients = Array.from(new Set(projects.map((p) => p.client)));
+
   return (
     <>
       {/* ── Hero ─────────────────────────────────────────── */}
@@ -89,7 +99,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Stats ────────────────────────────────────────── */}
-      <Stats />
+      <Stats projectCount={projects.length} clientCount={clients.length} productCount={products.length} />
 
       {/* ── Why us ───────────────────────────────────────── */}
       <section className="bg-surface-container-low py-20">
@@ -119,7 +129,7 @@ export default function HomePage() {
           </Reveal>
           <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
             {services.slice(0, 4).map((s, i) => (
-              <Reveal key={s.title} delay={i * 90}>
+              <Reveal key={s.id} delay={i * 90}>
                 <ServiceCard service={s} />
               </Reveal>
             ))}
@@ -166,7 +176,7 @@ export default function HomePage() {
       <Sectors />
 
       {/* ── Clients ──────────────────────────────────────── */}
-      <ClientsStrip />
+      <ClientsStrip clients={clients} />
 
       {/* ── CTA ──────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-secondary py-20 text-on-secondary">

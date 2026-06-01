@@ -4,6 +4,9 @@ import { ButtonLink } from "@/components/button";
 import { Icon } from "@/components/icon";
 import { PageHero } from "@/components/section";
 import { PortfolioExplorer } from "@/components/portfolio-explorer";
+import { getProjects } from "@/lib/data";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "أعمالنا",
@@ -11,7 +14,8 @@ export const metadata: Metadata = {
     "سابقة أعمال مسارات المستكشف مع الجهات الحكومية والمؤسسات: مشاريع تطوير برمجيات، أنظمة مراقبة، صيانة تقنية، وتوريد وتركيب في مختلف مناطق المملكة.",
 };
 
-export default function PortfolioPage() {
+export default async function PortfolioPage() {
+  const projects = await getProjects();
   return (
     <>
       <PageHero
@@ -22,7 +26,7 @@ export default function PortfolioPage() {
 
       <section className="py-16">
         <Container>
-          <PortfolioExplorer />
+          <PortfolioExplorer projects={projects} />
         </Container>
       </section>
 

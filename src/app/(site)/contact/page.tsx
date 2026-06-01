@@ -3,7 +3,10 @@ import { Container } from "@/components/container";
 import { Icon } from "@/components/icon";
 import { PageHero } from "@/components/section";
 import { ContactForm } from "@/components/contact-form";
-import { site } from "@/lib/site";
+import { getSettings } from "@/lib/data";
+import { site as fallback } from "@/lib/site";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "تواصل معنا",
@@ -11,7 +14,8 @@ export const metadata: Metadata = {
     "تواصل مع فريق مسارات المستكشف عبر النموذج أو الهاتف أو واتساب أو البريد الإلكتروني للحصول على استشارة تقنية أو عرض سعر.",
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const site = (await getSettings()) ?? fallback;
   return (
     <>
       <PageHero

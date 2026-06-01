@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { Icon } from "@/components/icon";
 import { cn } from "@/lib/utils";
-import type { Advantage, Product, Service } from "@/lib/site";
+import type { Advantage } from "@/lib/site";
+import type { Product, Service } from "@prisma/client";
 
 export function ServiceCard({ service }: { service: Service }) {
   return (

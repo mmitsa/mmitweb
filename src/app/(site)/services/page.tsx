@@ -4,7 +4,9 @@ import { ButtonLink } from "@/components/button";
 import { PageHero } from "@/components/section";
 import { ServiceCard } from "@/components/cards";
 import { Reveal } from "@/components/reveal";
-import { services } from "@/lib/site";
+import { getServices } from "@/lib/data";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "الخدمات",
@@ -12,7 +14,8 @@ export const metadata: Metadata = {
     "حلول الاتصالات والشبكات، البنية التحتية لتقنية المعلومات، الأمن السيبراني، التحول الرقمي، الأنظمة الذكية، والدعم الفني من مسارات المستكشف.",
 };
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const services = await getServices();
   return (
     <>
       <PageHero
@@ -25,7 +28,7 @@ export default function ServicesPage() {
         <Container>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
             {services.map((s, i) => (
-              <Reveal key={s.slug} delay={(i % 4) * 80}>
+              <Reveal key={s.id} delay={(i % 4) * 80}>
                 <ServiceCard service={s} />
               </Reveal>
             ))}

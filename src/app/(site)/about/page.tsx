@@ -3,7 +3,9 @@ import { Container } from "@/components/container";
 import { Icon } from "@/components/icon";
 import { SectionHeading } from "@/components/section";
 import { ProductCard } from "@/components/cards";
-import { products } from "@/lib/site";
+import { getProducts } from "@/lib/data";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "من نحن",
@@ -26,7 +28,8 @@ const fields = [
   { icon: "devices", title: "الأجهزة التقنية", desc: "توريد وتركيب أحدث الأجهزة والمعدات التقنية لدعم البنية التحتية للمشاريع الكبرى." },
 ];
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const products = await getProducts();
   return (
     <>
       {/* Hero */}
@@ -158,7 +161,7 @@ export default function AboutPage() {
           />
           <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {products.map((p) => (
-              <ProductCard key={p.title} product={p} />
+              <ProductCard key={p.id} product={p} />
             ))}
           </div>
         </Container>

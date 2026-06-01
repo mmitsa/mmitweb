@@ -6,11 +6,9 @@ import { ButtonLink } from "@/components/button";
 import { Icon } from "@/components/icon";
 import { PathsBackdrop } from "@/components/paths";
 import { BreadcrumbJsonLd } from "@/components/json-ld";
-import { getService, services } from "@/lib/site";
+import { getService, getServices, getSettings } from "@/lib/data";
 
-export function generateStaticParams() {
-  return services.map((s) => ({ slug: s.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
@@ -18,7 +16,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const service = getService(slug);
+  const service = await getService(slug);
   if (!service) return { title: "الخدمة غير موجودة" };
   return {
     title: service.title,
@@ -33,14 +31,20 @@ export default async function ServiceDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const service = getService(slug);
+  const [service, all, settings] = await Promise.all([
+    getService(slug),
+    getServices(),
+    getSettings(),
+  ]);
   if (!service) notFound();
 
-  const related = services.filter((s) => s.slug !== service.slug).slice(0, 3);
+  const related = all.filter((s) => s.slug !== service.slug).slice(0, 3);
+  const baseUrl = settings?.url ?? "https://mmit.sa";
 
   return (
     <>
       <BreadcrumbJsonLd
+        baseUrl={baseUrl}
         items={[
           { name: "الرئيسية", path: "/" },
           { name: "الخدمات", path: "/services" },
