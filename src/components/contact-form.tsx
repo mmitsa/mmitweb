@@ -2,7 +2,7 @@
 
 import { useActionState } from "react";
 import { Icon } from "@/components/icon";
-import { submitContact, type ContactState } from "@/app/contact/actions";
+import { submitContact, type ContactState } from "@/app/(site)/contact/actions";
 
 const serviceOptions = [
   "تطوير مواقع الويب",

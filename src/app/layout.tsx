@@ -1,11 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Sans_Arabic, Tajawal } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
-import { WhatsAppFab } from "@/components/whatsapp-fab";
-import { Analytics } from "@/components/analytics";
-import { OrganizationJsonLd } from "@/components/json-ld";
 import { site } from "@/lib/site";
 
 const ibmPlexArabic = IBM_Plex_Sans_Arabic({
@@ -79,20 +74,9 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
         />
-        <OrganizationJsonLd />
       </head>
-      <body className="min-h-full flex flex-col bg-background text-on-background">
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:right-4 focus:top-4 focus:z-[100] focus:rounded focus:bg-secondary focus:px-4 focus:py-2 focus:font-head focus:text-sm focus:text-on-secondary"
-        >
-          تخطٍّ إلى المحتوى
-        </a>
-        <Navbar />
-        <main id="main-content" className="flex-grow">{children}</main>
-        <Footer />
-        <WhatsAppFab />
-        <Analytics />
+      <body className="min-h-full bg-background text-on-background">
+        {children}
       </body>
     </html>
   );
