@@ -1,1 +1,45 @@
-name: CD — Deploy to Productionon:  push:    branches: [main]  workflow_dispatch:concurrency:  group: production-deploy  cancel-in-progress: falsejobs:  deploy:    name: Deploy    runs-on: ubuntu-latest    environment: production    steps:      - name: Deploy via SSH        uses: appleboy/ssh-action@v1        with:          host: ${{ secrets.SSH_HOST }}          username: ${{ secrets.SSH_USER }}          key: ${{ secrets.SSH_PRIVATE_KEY }}          port: 2244          script: |            set -e            cd ${{ secrets.DEPLOY_PATH }}            echo "==> Pulling latest code..."            git pull origin main            echo "==> Installing dependencies..."            npm ci --prefer-offline            echo "==> Running DB migrations..."            npm run db:migrate            echo "==> Building..."            npm run build            echo "==> Copying static assets..."            cp -r public .next/standalone/public            cp -r .next/static .next/standalone/.next/static            echo "==> Restarting service..."            pm2 restart mmitweb --update-env || pm2 start .next/standalone/server.js --name mmitweb --env production            echo "==> Deploy complete!"
+name: CD — Deploy to Production
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 2244
+          script: |
+            set -e
+            cd ${{ secrets.DEPLOY_PATH }}
+
+            echo "==> Pulling latest code..."
+            git pull origin main
+
+            echo "==> Installing dependencies..."
+            npm ci --prefer-offline
+
+            echo "==> Running DB migrations..."
+            npm run db:migrate
+
+            echo "==> Building..."
+            npm run build
+
+            echo "==> Restarting service..."
+            systemctl restart mmitweb
+
+            echo "==> Deploy complete!"
