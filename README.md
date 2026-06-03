@@ -1,5 +1,7 @@
 # مسارات المستكشف — Website & CMS
 
+[![CI](https://github.com/mmitsa/mmitweb/actions/workflows/ci.yml/badge.svg)](https://github.com/mmitsa/mmitweb/actions/workflows/ci.yml)
+
 Corporate website **and** content-management system for **مسارات المستكشف
 للاتصالات وتقنية المعلومات** (MMIT) — a Saudi communications & IT company.
 RTL-first, Arabic, with a database-backed admin where every piece of content
